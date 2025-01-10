@@ -6,7 +6,7 @@
                     <h4>Create an Account</h4>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form [formGroup]="registerForm" (ngSubmit)="submit()">
                         <div class="text-center mb-4">
                             <img src="register-logo.jpg" alt="Register Icon" class="img-fluid rounded-circle"
                                 width="100" />
@@ -14,30 +14,66 @@
                         <!-- NIC -->
                         <div class="form-group mb-3">
                             <label for="nic">NIC</label>
-                            <input type="text" id="nic" name="nic" class="form-control" placeholder="Enter your NIC"
-                                required />
+                            <input type="text" id="nic" formControlName="nic" name="nic" class="form-control"
+                                placeholder="Enter your NIC" />
+                            <div *ngIf="registerForm.controls.nic?.touched && registerForm.controls.nic?.invalid"
+                                class="text-danger">
+                                <small *ngIf="registerForm.controls.nic?.errors?.['required']">
+                                    NIC is required.
+                                </small>
+                            </div>
                         </div>
-                        <!-- Username -->
+                        <!-- Email -->
                         <div class="form-group mb-3">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="username" class="form-control"
-                                placeholder="Choose a username" required />
+                            <label for="email">Email</label>
+                            <input type="email" id="email" formControlName="email" name="email" class="form-control"
+                                placeholder="Enter your email" />
+                            <div *ngIf="registerForm.controls.email?.touched && registerForm.controls.email?.invalid"
+                                class="text-danger">
+                                <small *ngIf="registerForm.controls.email?.errors?.['required']">
+                                    Email is required.
+                                </small>
+                                <small *ngIf="registerForm.controls.email?.errors?.['email']">
+                                    Please enter a valid email address.
+                                </small>
+                            </div>
                         </div>
                         <!-- Password -->
                         <div class="form-group mb-3">
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" class="form-control"
-                                placeholder="Enter your password" required />
+                            <input type="password" id="password" formControlName="password" name="password"
+                                class="form-control" placeholder="Enter your password" />
+                            <div *ngIf="registerForm.controls.password?.touched && registerForm.controls.password?.invalid"
+                                class="text-danger">
+                                <small *ngIf="registerForm.controls.password?.errors?.['required']">
+                                    Password is required.
+                                </small>
+                                <small *ngIf="registerForm.controls.password?.errors?.['minlength']">
+                                    Password must be at least 8 characters long.
+                                </small>
+                                <small *ngIf="registerForm.controls.password?.errors?.['maxlength']">
+                                    Password cannot exceed 15 characters.
+                                </small>
+                            </div>
                         </div>
                         <!-- Confirm Password -->
                         <div class="form-group mb-4">
                             <label for="confirmPassword">Confirm Password</label>
-                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
-                                placeholder="Confirm your password" required />
+                            <input type="password" id="confirmPassword" formControlName="confirmPassword"
+                                name="confirmPassword" class="form-control" placeholder="Confirm your password" />
+                            <div *ngIf="registerForm.controls.confirmPassword?.touched && registerForm.controls.confirmPassword?.invalid"
+                                class="text-danger">
+                                <small *ngIf="registerForm.controls.confirmPassword?.errors?.['required']">
+                                    Confirm Password is required.
+                                </small>
+                                <small *ngIf="registerForm.errors?.['passwordMismatch'] && registerForm.touched">
+                                    Passwords do not match.
+                                </small>
+                            </div>
                         </div>
                         <!-- Submit Button -->
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-block">
+                            <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid">
                                 Register
                             </button>
                         </div>
