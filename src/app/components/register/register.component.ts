@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { passwordMatchValidator } from '../../validators/password-match.validator';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,8 @@ import { passwordMatchValidator } from '../../validators/password-match.validato
   styleUrl: './register.component.css',
 })
 export class RegisterComponent {
+  constructor(private authService: AuthService) {}
+
   registerForm = new FormGroup(
     {
       nic: new FormControl('', Validators.required),
@@ -44,7 +47,16 @@ export class RegisterComponent {
 
   submit(): void {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+      const { confirmPassword, ...userValues } = this.registerForm.value;
+
+      this.authService.registration(userValues).subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
     }
   }
 }
