@@ -1,0 +1,16 @@
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card-header {
+  border-bottom: none;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.img-fluid {
+  margin: auto;
+}

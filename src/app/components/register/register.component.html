@@ -1,1 +1,54 @@
-<p>register works!</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-sm-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Create an Account</h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="text-center mb-4">
+                            <img src="register-logo.jpg" alt="Register Icon" class="img-fluid rounded-circle"
+                                width="100" />
+                        </div>
+                        <!-- NIC -->
+                        <div class="form-group mb-3">
+                            <label for="nic">NIC</label>
+                            <input type="text" id="nic" name="nic" class="form-control" placeholder="Enter your NIC"
+                                required />
+                        </div>
+                        <!-- Username -->
+                        <div class="form-group mb-3">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" class="form-control"
+                                placeholder="Choose a username" required />
+                        </div>
+                        <!-- Password -->
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control"
+                                placeholder="Enter your password" required />
+                        </div>
+                        <!-- Confirm Password -->
+                        <div class="form-group mb-4">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                                placeholder="Confirm your password" required />
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Register
+                            </button>
+                        </div>
+                        <!-- Login Redirect -->
+                        <div class="text-center">
+                            <p class="mb-0">Already have an account?</p>
+                            <a routerLink="/login" class="btn btn-link text-primary">Go to Login</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
