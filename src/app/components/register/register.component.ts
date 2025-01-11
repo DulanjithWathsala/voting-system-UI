@@ -39,13 +39,6 @@ export class RegisterComponent {
     { validators: passwordMatchValidator() }
   );
 
-  verifyConfirmPassword(): boolean {
-    return (
-      this.registerForm.value.password ===
-      this.registerForm.value.confirmPassword
-    );
-  }
-
   submit(): void {
     if (this.registerForm.valid) {
       const { confirmPassword, ...userValues } = this.registerForm.value;
