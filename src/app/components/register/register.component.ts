@@ -10,6 +10,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { passwordMatchValidator } from '../../validators/password-match.validator';
 import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -52,9 +53,22 @@ export class RegisterComponent {
       this.authService.registration(userValues).subscribe({
         next: (data) => {
           console.log(data);
+          Swal.fire({
+            title: 'Good job!',
+            text: 'Registration Successfully completed!',
+            icon: 'success',
+          });
+
+          this.registerForm.reset();
         },
         error: (error) => {
           console.log(error);
+          Swal.fire({
+            icon: 'error',
+            title: error.error.status,
+            text: error.error.message,
+          });
+          this.registerForm.reset();
         },
       });
     }
