@@ -13,4 +13,8 @@ export class AuthService {
   registration(requestBody: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register`, requestBody);
   }
+
+  login(requestBody: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/login`, requestBody);
+  }
 }

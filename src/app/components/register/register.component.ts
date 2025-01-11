@@ -48,7 +48,7 @@ export class RegisterComponent {
           console.log(data);
           Swal.fire({
             title: 'Good job!',
-            text: 'Registration Successfully completed!',
+            text: 'Registration successfully completed!',
             icon: 'success',
           });
 
