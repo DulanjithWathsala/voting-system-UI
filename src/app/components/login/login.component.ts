@@ -30,7 +30,7 @@ export class LoginComponent {
         next: (data) => {
           console.log(data);
 
-          localStorage.setItem('authToken', `data.jwtToken`);
+          localStorage.setItem('authToken', `${data.jwtToken}`);
 
           Swal.fire({
             title: 'Good job!',
