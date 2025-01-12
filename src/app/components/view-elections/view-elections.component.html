@@ -45,13 +45,119 @@
                         <button class="btn btn-primary mb-2">
                             <i class="bi bi-eye"></i> View Details
                         </button>
-                        <button class="btn btn-outline-secondary mb-2">
+                        <button class="btn btn-outline-secondary mb-2" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
                             <i class="bi bi-pencil-square"></i> <!-- Edit Icon -->
                         </button>
                         <button class="btn btn-outline-danger">
                             <i class="bi bi-trash"></i> <!-- Delete Icon -->
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-success" id="exampleModalLabel">Update Election</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body p-4">
+                    <form [formGroup]="updateElectionForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <!-- First Column -->
+                            <div class="col-md-6">
+                                <!-- Title Field -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label fs-6">Election Title</label>
+                                    <input type="text" formControlName="title"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="title"
+                                        placeholder="Enter election title" required>
+                                    <div *ngIf="updateElectionForm.controls.title?.touched && updateElectionForm.controls.title?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="updateElectionForm.controls.title?.errors?.['required']">
+                                            Election title is required.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Start Date Field -->
+                                <div class="mb-3">
+                                    <label for="start-date" class="form-label fs-6">Start Date</label>
+                                    <input type="date" formControlName="startDate"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="start-date"
+                                        required>
+                                    <div *ngIf="updateElectionForm.controls.startDate?.touched && updateElectionForm.controls.startDate?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="updateElectionForm.controls.startDate?.errors?.['required']">
+                                            Start date is required.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- Status Field -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label fs-6">Election Status</label>
+                                    <select class="form-select form-select-lg border-0 shadow-sm"
+                                        formControlName="status" id="status" required>
+                                        <option value="" disabled selected>Select Status</option>
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="ongoing">Ongoing</option>
+                                        <option value="ended">Ended</option>
+                                    </select>
+                                    <div *ngIf="updateElectionForm.controls.status?.touched && updateElectionForm.controls.status?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="updateElectionForm.controls.status?.errors?.['required']">
+                                            Election status is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second Column -->
+                            <div class="col-md-6">
+                                <!-- Description Field -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label fs-6">Election Description</label>
+                                    <textarea class="form-control form-control-lg border-0 shadow-sm"
+                                        formControlName="description" id="description" rows="4"
+                                        placeholder="Enter election description" required></textarea>
+                                    <div *ngIf="updateElectionForm.controls.description?.touched && updateElectionForm.controls.description?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="updateElectionForm.controls.description?.errors?.['required']">
+                                            Election description is required.
+                                        </small>
+                                    </div>
+                                </div>
+
+                                <!-- End Date Field -->
+                                <div class="mb-3">
+                                    <label for="end-date" class="form-label fs-6">End Date</label>
+                                    <input type="date" formControlName="endDate"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="end-date" required>
+                                    <div *ngIf="updateElectionForm.controls.endDate?.touched && updateElectionForm.controls.endDate?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="updateElectionForm.controls.endDate?.errors?.['required']">
+                                            End date is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
+                            <button type="submit"
+                                class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

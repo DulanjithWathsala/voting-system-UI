@@ -13,3 +13,27 @@
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
 }
+
+/* Gradient style for the button */
+.btn-gradient {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+}
+
+/* Reduce the font size for form labels and inputs */
+.form-label {
+  font-size: 0.9rem;
+}
+
+.form-control-lg,
+.form-select-lg {
+  font-size: 0.9rem;
+}
+
+/* Optional: Adjust the card header and body padding */
+.card-header {
+  padding: 1rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}
