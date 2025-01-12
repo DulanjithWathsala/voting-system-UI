@@ -17,4 +17,12 @@ export class ElectionService {
       }),
     });
   }
+
+  getAllElections(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/retrieve`, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }

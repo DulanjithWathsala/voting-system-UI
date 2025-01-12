@@ -44,8 +44,9 @@
                                     <select class="form-select form-select-lg border-0 shadow-sm"
                                         formControlName="status" id="status" required>
                                         <option value="" disabled selected>Select Status</option>
-                                        <option value="active">Active</option>
-                                        <option value="inactive">Inactive</option>
+                                        <option value="scheduled">Scheduled</option>
+                                        <option value="ongoing">Ongoing</option>
+                                        <option value="ended">Ended</option>
                                     </select>
                                     <div *ngIf="createElectionForm.controls.status?.touched && createElectionForm.controls.status?.invalid"
                                         class="text-danger">

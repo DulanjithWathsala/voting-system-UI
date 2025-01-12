@@ -1,1 +1,59 @@
-<p>view-elections works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Loop through the elections list -->
+        <div *ngFor="let election of elections" class="col-md-12 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body d-flex">
+                    <!-- Election Title and Description -->
+                    <div class="flex-grow-1">
+                        <h5 class="card-title">{{ election.title }}</h5>
+                        <p class="card-text">{{ election.description }}</p>
+
+                        <!-- Start and End Dates -->
+                        <p class="mb-2"><strong>Start Date:</strong> {{ election.startDate }}</p>
+                        <p class="mb-2"><strong>End Date:</strong> {{ election.endDate }}</p>
+
+                        <!-- Election Status (Scheduled, Ongoing, Ended) -->
+                        <p class="mb-2">
+                            <strong>Status:</strong>
+                            <span [ngClass]="{
+                                'text-info': election.status === 'scheduled',
+                                'text-primary': election.status === 'ongoing',
+                                'text-secondary': election.status === 'ended'
+                            }">
+                                {{ election.status | titlecase }}
+                            </span>
+                        </p>
+
+                        <!-- Result Validated and Active Status -->
+                        <p *ngIf="election.resultValidated">
+                            <strong>Result Validated:</strong> Yes
+                        </p>
+                        <p *ngIf="!election.resultValidated">
+                            <strong>Result Validated:</strong> No
+                        </p>
+                        <p *ngIf="election.isActive">
+                            <strong>Election Active:</strong> Yes
+                        </p>
+                        <p *ngIf="!election.isActive">
+                            <strong>Election Active:</strong> No
+                        </p>
+                    </div>
+
+                    <!-- Actions (View, Edit, Delete with Bootstrap Icons) -->
+                    <div class="ms-3 d-flex flex-column justify-content-between">
+                        <button class="btn btn-primary mb-2">
+                            <i class="bi bi-eye"></i> View Details
+                        </button>
+                        <button class="btn btn-outline-secondary mb-2">
+                            <i class="bi bi-pencil-square"></i> <!-- Edit Icon -->
+                        </button>
+                        <button class="btn btn-outline-danger">
+                            <i class="bi bi-trash"></i> <!-- Delete Icon -->
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
