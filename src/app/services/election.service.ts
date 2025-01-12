@@ -37,4 +37,12 @@ export class ElectionService {
       }
     );
   }
+
+  deleteElection(electionId: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/delete/${electionId}`, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }

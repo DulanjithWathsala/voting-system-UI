@@ -107,4 +107,24 @@ export class ViewElectionsComponent implements OnInit {
       status: selectedElection.status,
     });
   }
+
+  deleteCurrentElection(electionId: any): void {
+    Swal.fire({
+      title: 'Do you want to Delete current election details?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.electionService.deleteElection(electionId).subscribe(() => {
+          Swal.fire('Delete successful!', '', 'success');
+          this.fetchElections();
+        });
+      } else if (result.isDenied) {
+        Swal.fire('Delete canceled!', '', 'info');
+      }
+    });
+  }
 }
