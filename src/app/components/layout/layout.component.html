@@ -50,7 +50,18 @@
 
     <!-- Main Content -->
     <div class="flex-grow-1 p-4">
+        <!-- Welcome message displayed if no content is loaded yet -->
+        <div *ngIf="router.url === '/layout'" class="text-center p-5">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Welcome to Electify!</h4>
+                <p>Get started by creating your first election. Click on the "Create Election" button from the sidebar
+                    to begin.</p>
+                <hr>
+                <p class="mb-0">You can always manage and view elections here.</p>
+            </div>
+        </div>
+
         <!-- Dynamic content will load here -->
-        <router-outlet></router-outlet> <!-- This is where the relevant component will be displayed -->
+        <router-outlet></router-outlet>
     </div>
 </div>

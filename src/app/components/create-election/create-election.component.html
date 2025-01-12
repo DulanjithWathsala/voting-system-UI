@@ -1,1 +1,67 @@
-<p>create-election works!</p>
+<div class="container-fluid d-flex flex-column justify-content-center mt-5">
+    <div class="row justify-content-center align-items-center flex-grow-1 mt-5">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-3">
+                <div class="card-header bg-gradient text-success text-center py-3">
+                    <h3 class="h4">Create Election</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form>
+                        <div class="row">
+                            <!-- First Column -->
+                            <div class="col-md-6">
+                                <!-- Title Field -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label fs-6">Election Title</label>
+                                    <input type="text" class="form-control form-control-lg border-0 shadow-sm"
+                                        id="title" placeholder="Enter election title" required>
+                                </div>
+
+                                <!-- Start Date Field -->
+                                <div class="mb-3">
+                                    <label for="start-date" class="form-label fs-6">Start Date</label>
+                                    <input type="datetime-local" class="form-control form-control-lg border-0 shadow-sm"
+                                        id="start-date" required>
+                                </div>
+
+                                <!-- Status Field -->
+                                <div class="mb-3">
+                                    <label for="status" class="form-label fs-6">Election Status</label>
+                                    <select class="form-select form-select-lg border-0 shadow-sm" id="status" required>
+                                        <option value="" disabled selected>Select Status</option>
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Second Column -->
+                            <div class="col-md-6">
+                                <!-- Description Field -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label fs-6">Election Description</label>
+                                    <textarea class="form-control form-control-lg border-0 shadow-sm" id="description"
+                                        rows="4" placeholder="Enter election description" required></textarea>
+                                </div>
+
+                                <!-- End Date Field -->
+                                <div class="mb-3">
+                                    <label for="end-date" class="form-label fs-6">End Date</label>
+                                    <input type="datetime-local" class="form-control form-control-lg border-0 shadow-sm"
+                                        id="end-date" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
+                            <button type="submit"
+                                class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Publish</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
