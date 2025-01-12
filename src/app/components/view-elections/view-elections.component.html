@@ -46,7 +46,7 @@
                             <i class="bi bi-eye"></i> View Details
                         </button>
                         <button class="btn btn-outline-secondary mb-2" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal">
+                            data-bs-target="#exampleModal" (click)="onSelectElection(election)">
                             <i class="bi bi-pencil-square"></i> <!-- Edit Icon -->
                         </button>
                         <button class="btn btn-outline-danger">
@@ -153,7 +153,6 @@
 
                         <!-- Action Buttons -->
                         <div class="d-flex justify-content-end gap-3">
-                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
                             <button type="submit"
                                 class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Update</button>
                         </div>

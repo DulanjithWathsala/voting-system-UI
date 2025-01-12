@@ -17,6 +17,7 @@ import {
 })
 export class ViewElectionsComponent implements OnInit {
   elections: any[] = [];
+  selectedElection: any = {};
 
   updateElectionForm = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -48,4 +49,35 @@ export class ViewElectionsComponent implements OnInit {
   }
 
   onSubmit(): void {}
+
+  onSelectElection(selectedElection: any): void {
+    this.selectedElection = selectedElection;
+
+    if (typeof this.selectedElection.startDate === 'string') {
+      this.selectedElection.startDate = new Date(
+        this.selectedElection.startDate
+      );
+    }
+    if (typeof this.selectedElection.endDate === 'string') {
+      this.selectedElection.endDate = new Date(this.selectedElection.endDate);
+    }
+
+    if (this.selectedElection.startDate instanceof Date) {
+      this.selectedElection.startDate = this.selectedElection.startDate
+        .toISOString()
+        .split('T')[0];
+    }
+    if (this.selectedElection.endDate instanceof Date) {
+      this.selectedElection.endDate = this.selectedElection.endDate
+        .toISOString()
+        .split('T')[0];
+    }
+    this.updateElectionForm.patchValue({
+      title: selectedElection.title,
+      description: selectedElection.description,
+      startDate: selectedElection.startDate,
+      endDate: selectedElection.endDate,
+      status: selectedElection.status,
+    });
+  }
 }
