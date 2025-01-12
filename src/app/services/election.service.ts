@@ -25,4 +25,16 @@ export class ElectionService {
       }),
     });
   }
+
+  updateElectionDetails(electionId: any, requestBody: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}/update/${electionId}`,
+      requestBody,
+      {
+        headers: new HttpHeaders({
+          Authorization: `${localStorage.getItem('authToken')}`,
+        }),
+      }
+    );
+  }
 }

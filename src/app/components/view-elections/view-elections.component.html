@@ -10,8 +10,8 @@
                         <p class="card-text">{{ election.description }}</p>
 
                         <!-- Start and End Dates -->
-                        <p class="mb-2"><strong>Start Date:</strong> {{ election.startDate }}</p>
-                        <p class="mb-2"><strong>End Date:</strong> {{ election.endDate }}</p>
+                        <p class="mb-2"><strong>Start Date:</strong> {{ election.startDate | date: 'yyyy-MM-dd' }}</p>
+                        <p class="mb-2"><strong>End Date:</strong> {{ election.endDate | date: 'yyyy-MM-dd' }}</p>
 
                         <!-- Election Status (Scheduled, Ongoing, Ended) -->
                         <p class="mb-2">

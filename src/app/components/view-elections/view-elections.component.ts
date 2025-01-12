@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectionService } from '../../services/election.service';
 import Swal from 'sweetalert2';
+import { Modal } from 'bootstrap';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -48,7 +49,33 @@ export class ViewElectionsComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    if (this.updateElectionForm.valid) {
+      this.electionService
+        .updateElectionDetails(
+          this.selectedElection.id,
+          this.updateElectionForm.value
+        )
+        .subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Good job!',
+              text: 'Election details updated successfully!',
+              icon: 'success',
+            }).then(() => {
+              window.location.reload();
+            });
+          },
+          error: (error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Something went wrong!',
+              text: 'Could not update election data.',
+            });
+          },
+        });
+    }
+  }
 
   onSelectElection(selectedElection: any): void {
     this.selectedElection = selectedElection;
