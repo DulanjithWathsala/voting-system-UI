@@ -6,32 +6,53 @@
                     <h3 class="h4">Create Election</h3>
                 </div>
                 <div class="card-body p-4">
-                    <form>
+                    <form [formGroup]="createElectionForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <!-- First Column -->
                             <div class="col-md-6">
                                 <!-- Title Field -->
                                 <div class="mb-3">
                                     <label for="title" class="form-label fs-6">Election Title</label>
-                                    <input type="text" class="form-control form-control-lg border-0 shadow-sm"
-                                        id="title" placeholder="Enter election title" required>
+                                    <input type="text" formControlName="title"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="title"
+                                        placeholder="Enter election title" required>
+                                    <div *ngIf="createElectionForm.controls.title?.touched && createElectionForm.controls.title?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createElectionForm.controls.title?.errors?.['required']">
+                                            Election title is required.
+                                        </small>
+                                    </div>
                                 </div>
 
                                 <!-- Start Date Field -->
                                 <div class="mb-3">
                                     <label for="start-date" class="form-label fs-6">Start Date</label>
-                                    <input type="datetime-local" class="form-control form-control-lg border-0 shadow-sm"
-                                        id="start-date" required>
+                                    <input type="date" formControlName="startDate"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="start-date"
+                                        required>
+                                    <div *ngIf="createElectionForm.controls.startDate?.touched && createElectionForm.controls.startDate?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createElectionForm.controls.startDate?.errors?.['required']">
+                                            Start date is required.
+                                        </small>
+                                    </div>
                                 </div>
 
                                 <!-- Status Field -->
                                 <div class="mb-3">
                                     <label for="status" class="form-label fs-6">Election Status</label>
-                                    <select class="form-select form-select-lg border-0 shadow-sm" id="status" required>
+                                    <select class="form-select form-select-lg border-0 shadow-sm"
+                                        formControlName="status" id="status" required>
                                         <option value="" disabled selected>Select Status</option>
                                         <option value="active">Active</option>
                                         <option value="inactive">Inactive</option>
                                     </select>
+                                    <div *ngIf="createElectionForm.controls.status?.touched && createElectionForm.controls.status?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createElectionForm.controls.status?.errors?.['required']">
+                                            Election status is required.
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
 
@@ -40,15 +61,28 @@
                                 <!-- Description Field -->
                                 <div class="mb-3">
                                     <label for="description" class="form-label fs-6">Election Description</label>
-                                    <textarea class="form-control form-control-lg border-0 shadow-sm" id="description"
-                                        rows="4" placeholder="Enter election description" required></textarea>
+                                    <textarea class="form-control form-control-lg border-0 shadow-sm"
+                                        formControlName="description" id="description" rows="4"
+                                        placeholder="Enter election description" required></textarea>
+                                    <div *ngIf="createElectionForm.controls.description?.touched && createElectionForm.controls.description?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createElectionForm.controls.description?.errors?.['required']">
+                                            Election description is required.
+                                        </small>
+                                    </div>
                                 </div>
 
                                 <!-- End Date Field -->
                                 <div class="mb-3">
                                     <label for="end-date" class="form-label fs-6">End Date</label>
-                                    <input type="datetime-local" class="form-control form-control-lg border-0 shadow-sm"
-                                        id="end-date" required>
+                                    <input type="date" formControlName="endDate"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="end-date" required>
+                                    <div *ngIf="createElectionForm.controls.endDate?.touched && createElectionForm.controls.endDate?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createElectionForm.controls.endDate?.errors?.['required']">
+                                            End date is required.
+                                        </small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
