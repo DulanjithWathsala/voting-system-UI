@@ -6,7 +6,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 
@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
@@ -36,6 +36,8 @@ export class LoginComponent {
             title: 'Good job!',
             text: 'Login successful!',
             icon: 'success',
+          }).then(() => {
+            this.router.navigate(['/layout']);
           });
 
           this.loginForm.reset();
