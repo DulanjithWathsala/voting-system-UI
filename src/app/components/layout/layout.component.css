@@ -1,0 +1,17 @@
+.nav-link {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Light hover effect */
+  color: white; /* Ensure text color changes */
+}
+
+.nav-link.active {
+  background-color: #007bff; /* Highlight color */
+  color: white;
+}
+
+.nav-link.active:hover {
+  background-color: #0056b3; /* Slightly darker on hover */
+}

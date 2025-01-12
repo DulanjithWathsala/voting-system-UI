@@ -1,0 +1,60 @@
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
+        <a routerLink="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <i class="bi-check-circle me-2" style="font-size: 1.5rem;"></i>
+            <span class="fs-4">Electify</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a routerLink="/layout/create-election" routerLinkActive="active" class="nav-link text-white"
+                    [class.active]="router.url === '/layout/create-election'">
+                    <i class="bi-house me-2"></i>
+                    Create Election
+                </a>
+            </li>
+            <li>
+                <a routerLink="/layout/view-elections" routerLinkActive="active" class="nav-link text-white"
+                    [class.active]="router.url === '/layout/view-elections'">
+                    <i class="bi-table me-2"></i>
+                    View Elections
+                </a>
+            </li>
+        </ul>
+        <hr>
+        <div class="dropdown">
+            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>mdo</strong>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                <li><a class="dropdown-item" href="#">New project...</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" (click)="onSignOut($event)">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-grow-1 p-4">
+        <!-- Welcome message displayed if no content is loaded yet -->
+        <div *ngIf="router.url === '/layout'" class="text-center p-5">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">Welcome to Electify!</h4>
+                <p>Get started by creating your first election. Click on the "Create Election" button from the sidebar
+                    to begin.</p>
+                <hr>
+                <p class="mb-0">You can always manage and view elections here.</p>
+            </div>
+        </div>
+
+        <!-- Dynamic content will load here -->
+        <router-outlet></router-outlet>
+    </div>
+</div>
