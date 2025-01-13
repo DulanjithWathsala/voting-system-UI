@@ -2,3 +2,19 @@
 .btn-gradient {
   background: linear-gradient(135deg, #00b4d8, #0077b6);
 }
+
+/* Add this to the component's CSS file (view-elections.component.css) */
+.container-fluid {
+  height: 80vh; /* Set a fixed height for the container */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Optional: For smoother scroll behavior */
+.container-fluid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}

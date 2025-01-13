@@ -17,4 +17,12 @@ export class BallotService {
       }),
     });
   }
+
+  retrieveBallotByElectionId(electionId: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/retrieve-ballot/${electionId}`, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }

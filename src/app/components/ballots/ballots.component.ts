@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class BallotsComponent implements OnInit {
   election: any;
+  ballots: any[] = [];
 
   createBallotForm = new FormGroup({
     title: new FormControl(),
@@ -28,6 +29,24 @@ export class BallotsComponent implements OnInit {
   ngOnInit(): void {
     this.activedRoute.queryParams.subscribe((params) => {
       this.election = JSON.parse(atob(params['data']));
+    });
+
+    this.fetchBallots();
+  }
+
+  fetchBallots(): void {
+    const { id } = this.election;
+    this.ballotService.retrieveBallotByElectionId(id).subscribe({
+      next: (data: any[]) => {
+        this.ballots = data;
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Something went wrong!',
+          text: 'Could not fetch data',
+        });
+      },
     });
   }
 
@@ -63,4 +82,14 @@ export class BallotsComponent implements OnInit {
       });
     }
   }
+
+  viewResults(ballot: any): void {}
+
+  toggleBallotStatus(ballot: any): void {
+    ballot.isActive = !ballot.isActive;
+
+    //send req to backend here
+  }
+
+  deleteBallot(ballotId: any): void {}
 }
