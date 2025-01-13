@@ -1,0 +1,81 @@
+<div class="container-fluid d-flex flex-column justify-content-center">
+    <div class="row justify-content-center align-items-center flex-grow-1">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-3">
+                <!-- Card Header -->
+                <div class="card-header bg-gradient text-success text-center py-3">
+                    <h3 class="h4">Create Candidate</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- NIC Search Section -->
+                    <div class="mb-4">
+                        <label for="nic" class="form-label fs-6">Search Candidate by NIC</label>
+                        <div class="input-group">
+                            <input type="text" id="nic" class="form-control form-control-sm border-0 shadow-sm"
+                                placeholder="Enter NIC">
+                            <button class="btn btn-outline-primary" type="button">
+                                <i class="bi-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Candidate Details Card -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <p><strong>Username:</strong> John Doe</p>
+                            <p><strong>NIC:</strong> 123456789V</p>
+                            <p><strong>Email:</strong> johndoeexample.com</p>
+                        </div>
+                    </div>
+
+                    <!-- Create Candidate Form -->
+                    <form>
+                        <div class="row">
+                            <!-- Full Name Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="full-name" class="form-label fs-6">Full Name</label>
+                                <input type="text" id="full-name"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter full name" required>
+                            </div>
+
+                            <!-- Candidate Position Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="position" class="form-label fs-6">Candidate Position</label>
+                                <input type="text" id="position" class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter current position or highest education" required>
+                            </div>
+
+                            <!-- Party Selection -->
+                            <div class="col-md-6 mb-3">
+                                <label for="party" class="form-label fs-6">Select Party</label>
+                                <select id="party" class="form-select form-select-sm border-0 shadow-sm" required>
+                                    <option value="" disabled selected>Select Party</option>
+                                    <option value="party1">Party 1</option>
+                                    <option value="party2">Party 2</option>
+                                </select>
+                            </div>
+
+                            <!-- Election Selection -->
+                            <div class="col-md-6 mb-3">
+                                <label for="election" class="form-label fs-6">Select Election</label>
+                                <select id="election" class="form-select form-select-sm border-0 shadow-sm" required>
+                                    <option value="" disabled selected>Select Election</option>
+                                    <option value="election1">Election 1</option>
+                                    <option value="election2">Election 2</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
+                            <button type="submit"
+                                class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
