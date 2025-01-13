@@ -45,6 +45,9 @@
                         <button class="btn btn-primary mb-2">
                             Start Election
                         </button>
+                        <button class="btn btn-success text-white mb-2" (click)="ballotsOnClick(election)">
+                            Manage Ballots
+                        </button>
                         <button class="btn btn-outline-secondary mb-2" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" (click)="onSelectElection(election)">
                             <i class="bi bi-pencil-square"></i> <!-- Edit Icon -->

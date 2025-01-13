@@ -127,4 +127,6 @@ export class ViewElectionsComponent implements OnInit {
       }
     });
   }
+
+  ballotsOnClick(election: any): void {}
 }
