@@ -25,4 +25,12 @@ export class BallotService {
       }),
     });
   }
+
+  deleteBallot(id: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/delete-ballot/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }

@@ -91,5 +91,23 @@ export class BallotsComponent implements OnInit {
     //send req to backend here
   }
 
-  deleteBallot(ballotId: any): void {}
+  deleteBallot(ballotId: any): void {
+    Swal.fire({
+      title: 'Do you want to Delete current ballot details?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.ballotService.deleteBallot(ballotId).subscribe(() => {
+          Swal.fire('Delete successful!', '', 'success');
+          this.fetchBallots();
+        });
+      } else if (result.isDenied) {
+        Swal.fire('Delete canceled!', '', 'info');
+      }
+    });
+  }
 }
