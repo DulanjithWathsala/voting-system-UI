@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectionService } from '../../services/election.service';
 import Swal from 'sweetalert2';
-import { Modal } from 'bootstrap';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -9,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-elections',
@@ -28,7 +28,10 @@ export class ViewElectionsComponent implements OnInit {
     status: new FormControl('', Validators.required),
   });
 
-  constructor(private electionService: ElectionService) {}
+  constructor(
+    private electionService: ElectionService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchElections();
@@ -128,5 +131,9 @@ export class ViewElectionsComponent implements OnInit {
     });
   }
 
-  ballotsOnClick(election: any): void {}
+  ballotsOnClick(election: any): void {
+    this.router.navigate(['/ballots'], {
+      queryParams: { data: btoa(JSON.stringify(election)) },
+    });
+  }
 }
