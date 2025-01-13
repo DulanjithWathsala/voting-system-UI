@@ -89,8 +89,8 @@
 
                                             <!-- Change State Button -->
                                             <button class="btn" [ngClass]="{
-                                                'btn-success': !ballot.isActive,
-                                                'btn-danger': ballot.isActive
+                                                'btn-success': ballot.isActive,
+                                                'btn-danger': !ballot.isActive
                                             }" (click)="toggleBallotStatus(ballot)">
                                                 <i class="bi" [ngClass]="{
                                                     'bi-toggle-off': ballot.isActive,

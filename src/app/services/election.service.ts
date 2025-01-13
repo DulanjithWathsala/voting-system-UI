@@ -45,4 +45,28 @@ export class ElectionService {
       }),
     });
   }
+
+  startElection(electionId: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}/start/${electionId}`,
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: `${localStorage.getItem('authToken')}`,
+        }),
+      }
+    );
+  }
+
+  endElection(electionId: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.baseUrl}/end/${electionId}`,
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: `${localStorage.getItem('authToken')}`,
+        }),
+      }
+    );
+  }
 }

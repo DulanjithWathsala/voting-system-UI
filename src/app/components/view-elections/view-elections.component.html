@@ -42,8 +42,13 @@
 
                     <!-- Actions (View, Edit, Delete with Bootstrap Icons) -->
                     <div class="ms-3 d-flex flex-column justify-content-between">
-                        <button class="btn btn-primary mb-2">
+                        <button *ngIf="!election.isActive" class="btn btn-primary mb-2" (click)="start(election)">
                             Start Election
+                        </button>
+
+                        <!-- Stop Election Button (Visible only if election.isActive is true) -->
+                        <button *ngIf="election.isActive" class="btn btn-danger mb-2" (click)="end(election)">
+                            Stop Election
                         </button>
                         <button class="btn btn-success text-white mb-2" (click)="ballotsOnClick(election)">
                             Manage Ballots

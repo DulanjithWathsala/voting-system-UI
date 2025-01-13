@@ -136,4 +136,70 @@ export class ViewElectionsComponent implements OnInit {
       queryParams: { data: btoa(JSON.stringify(election)) },
     });
   }
+
+  start(election: any): void {
+    Swal.fire({
+      title: 'Confirm',
+      text: 'Do you want to start election?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, start it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.electionService.startElection(election.id).subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Sucess!',
+              text: 'Election Started!',
+              icon: 'success',
+            });
+
+            this.fetchElections();
+          },
+          error: (error) => {
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Could not start the election',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
+  }
+
+  end(election: any): void {
+    Swal.fire({
+      title: 'Confirm',
+      text: 'Do you want to end election?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, end it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.electionService.endElection(election.id).subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Sucess!',
+              text: 'Election ended!',
+              icon: 'success',
+            });
+
+            this.fetchElections();
+          },
+          error: (error) => {
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Could not end the election',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
+  }
 }
