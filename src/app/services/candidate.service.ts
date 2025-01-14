@@ -33,4 +33,12 @@ export class CandidateService {
       },
     });
   }
+
+  deleteCandidate(candidateId: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete/${candidateId}`, {
+      headers: {
+        Authorization: `${localStorage.getItem('authToken')}`,
+      },
+    });
+  }
 }
