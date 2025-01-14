@@ -1,4 +1,4 @@
-<div class="container-fluid d-flex flex-column justify-content-center">
+<div class="container-fluid d-flex flex-column justify-content-center mt-3">
     <div class="row justify-content-center align-items-center flex-grow-1">
         <div class="col-md-8">
             <div class="card shadow-lg rounded-3">
@@ -11,9 +11,11 @@
                     <div class="mb-4">
                         <label for="nic" class="form-label fs-6">Search Candidate by NIC</label>
                         <div class="input-group">
-                            <input type="text" id="nic" class="form-control form-control-sm border-0 shadow-sm"
-                                placeholder="Enter NIC">
-                            <button class="btn btn-outline-primary" type="button">
+                            <input #nicInput="ngModel" type="text" id="nic" [(ngModel)]="currentNic"
+                                class="form-control form-control-sm border-0 shadow-sm" placeholder="Enter NIC"
+                                required>
+                            <button class="btn btn-outline-primary" type="button"
+                                [disabled]="nicInput.control.value === ''" (click)="searchOnClick()">
                                 <i class="bi-search"></i> Search
                             </button>
                         </div>
@@ -22,58 +24,87 @@
                     <!-- Candidate Details Card -->
                     <div class="card shadow-sm mb-4">
                         <div class="card-body">
-                            <p><strong>Username:</strong> John Doe</p>
-                            <p><strong>NIC:</strong> 123456789V</p>
-                            <p><strong>Email:</strong> johndoeexample.com</p>
+                            <p><strong>NIC:</strong> {{currentUser ? currentUser.nic : ''}}</p>
+                            <p><strong>Email:</strong> {{currentUser ? currentUser.email : ''}}</p>
                         </div>
                     </div>
 
                     <!-- Create Candidate Form -->
-                    <form>
+                    <form [formGroup]="createCandidateForm" (ngSubmit)="onSubmit()">
                         <div class="row">
                             <!-- Full Name Field -->
                             <div class="col-md-6 mb-3">
                                 <label for="full-name" class="form-label fs-6">Full Name</label>
-                                <input type="text" id="full-name"
+                                <input type="text" id="full-name" formControlName="fullName"
                                     class="form-control form-control-sm border-0 shadow-sm"
-                                    placeholder="Enter full name" required>
+                                    placeholder="Enter full name">
+                                <div *ngIf="createCandidateForm.controls.fullName?.touched && createCandidateForm.controls.fullName?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.fullName?.errors?.['required']">
+                                        Full name is required.
+                                    </small>
+                                </div>
                             </div>
 
                             <!-- Candidate Position Field -->
                             <div class="col-md-6 mb-3">
                                 <label for="position" class="form-label fs-6">Candidate Position</label>
-                                <input type="text" id="position" class="form-control form-control-sm border-0 shadow-sm"
-                                    placeholder="Enter current position or highest education" required>
+                                <input type="text" id="position" formControlName="position"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter current position or highest education">
+                                <div *ngIf="createCandidateForm.controls.position?.touched && createCandidateForm.controls.position?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.position?.errors?.['required']">
+                                        Position is required.
+                                    </small>
+                                </div>
                             </div>
 
                             <!-- Party Selection -->
                             <div class="col-md-6 mb-3">
                                 <label for="party" class="form-label fs-6">Select Party</label>
-                                <select id="party" class="form-select form-select-sm border-0 shadow-sm" required>
+                                <select id="party" formControlName="partyId"
+                                    class="form-select form-select-sm border-0 shadow-sm">
                                     <option value="" disabled selected>Select Party</option>
-                                    <option value="party1">Party 1</option>
-                                    <option value="party2">Party 2</option>
+                                    <option value="1">Party 1</option>
+                                    <option value="2">Party 2</option>
                                 </select>
+                                <div *ngIf="createCandidateForm.controls.partyId?.touched && createCandidateForm.controls.partyId?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.partyId?.errors?.['required']">
+                                        Selecting a party is required.
+                                    </small>
+                                </div>
                             </div>
 
                             <!-- Election Selection -->
                             <div class="col-md-6 mb-3">
                                 <label for="election" class="form-label fs-6">Select Election</label>
-                                <select id="election" class="form-select form-select-sm border-0 shadow-sm" required>
+                                <select id="election" formControlName="election"
+                                    class="form-select form-select-sm border-0 shadow-sm">
                                     <option value="" disabled selected>Select Election</option>
-                                    <option value="election1">Election 1</option>
-                                    <option value="election2">Election 2</option>
+                                    @for (item of elections; track item.id) {
+                                    <option [value]="item.id">{{item.title}}</option>
+                                    }
+
                                 </select>
+                                <div *ngIf="createCandidateForm.controls.election?.touched && createCandidateForm.controls.election?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.election?.errors?.['required']">
+                                        Selecting an election is required.
+                                    </small>
+                                </div>
                             </div>
                         </div>
 
                         <!-- Action Buttons -->
                         <div class="d-flex justify-content-end gap-3">
                             <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
-                            <button type="submit"
+                            <button type="submit" [disabled]="createCandidateForm.invalid"
                                 class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Submit</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
