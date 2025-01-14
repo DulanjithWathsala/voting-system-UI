@@ -25,4 +25,12 @@ export class CandidateService {
       }),
     });
   }
+
+  retrieveCandidesByElectionId(electionId: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/retrieve/${electionId}`, {
+      headers: {
+        Authorization: `${localStorage.getItem('authToken')}`,
+      },
+    });
+  }
 }

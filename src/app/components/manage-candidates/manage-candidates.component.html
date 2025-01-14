@@ -10,13 +10,15 @@
     <div class="row mb-4">
         <div class="col-md-8 offset-md-2">
             <div class="input-group">
-                <select id="election-select" class="form-select form-select-lg border-0 shadow-sm" required>
+                <select id="election-select" #selectedElection="ngModel" [(ngModel)]="selectedElectionId"
+                    class="form-select border-0 shadow-sm" required>
                     <option value="" disabled selected>Select Election</option>
                     <option *ngFor="let election of elections" [value]="election.id">
                         {{ election.title }}
                     </option>
                 </select>
-                <button class="btn btn-outline-primary" type="button" (click)="loadCandidates()">
+                <button class="btn btn-outline-primary" [disabled]="selectedElection.invalid" type="button"
+                    (click)="loadCandidatesOnClick()">
                     <i class="bi-search"></i> Search
                 </button>
             </div>
