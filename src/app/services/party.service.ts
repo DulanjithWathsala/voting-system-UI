@@ -25,4 +25,16 @@ export class PartyService {
       }),
     });
   }
+
+  updatePartyDetails(partyId: any, requestBody: any): Observable<any> {
+    return this.http.put<any>(
+      `${this.baseUrl}/update/${partyId}`,
+      requestBody,
+      {
+        headers: new HttpHeaders({
+          Authorization: `${localStorage.getItem('authToken')}`,
+        }),
+      }
+    );
+  }
 }
