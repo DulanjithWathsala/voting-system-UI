@@ -63,16 +63,16 @@
                             <!-- Party Selection -->
                             <div class="col-md-6 mb-3">
                                 <label for="party" class="form-label fs-6">Select Party</label>
-                                <select id="party" formControlName="partyId"
+                                <select id="party" formControlName="party"
                                     class="form-select form-select-sm border-0 shadow-sm">
                                     <option value="" disabled selected>Select Party</option>
                                     @for (party of parties; track party.id) {
                                     <option [value]="party.id">{{party.name}}</option>
                                     }
                                 </select>
-                                <div *ngIf="createCandidateForm.controls.partyId?.touched && createCandidateForm.controls.partyId?.invalid"
+                                <div *ngIf="createCandidateForm.controls.party?.touched && createCandidateForm.controls.party?.invalid"
                                     class="text-danger">
-                                    <small *ngIf="createCandidateForm.controls.partyId?.errors?.['required']">
+                                    <small *ngIf="createCandidateForm.controls.party?.errors?.['required']">
                                         Selecting a party is required.
                                     </small>
                                 </div>

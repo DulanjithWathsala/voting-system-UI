@@ -27,7 +27,7 @@ export class CreateCandidateComponent implements OnInit {
   createCandidateForm = new FormGroup({
     fullName: new FormControl('', Validators.required),
     position: new FormControl('', Validators.required),
-    partyId: new FormControl('', Validators.required),
+    party: new FormControl('', Validators.required),
     election: new FormControl('', Validators.required),
   });
 
@@ -67,12 +67,16 @@ export class CreateCandidateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.createCandidateForm.valid) {
-      const { election, ...canidateDetails } = this.createCandidateForm.value;
+      const { election, party, ...canidateDetails } =
+        this.createCandidateForm.value;
 
       const requestBody = {
         nic: this.currentNic,
         election: {
           id: election,
+        },
+        party: {
+          id: party,
         },
         fullName: this.createCandidateForm.value.fullName,
         position: this.createCandidateForm.value.position,
