@@ -10,6 +10,7 @@ import {
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { ElectionService } from '../../services/election.service';
+import { PartyService } from '../../services/party.service';
 
 @Component({
   selector: 'app-create-candidate',
@@ -21,6 +22,7 @@ export class CreateCandidateComponent implements OnInit {
   currentNic: string = '';
   currentUser: any = null;
   elections: any[] = [];
+  parties: any[] = [];
 
   createCandidateForm = new FormGroup({
     fullName: new FormControl('', Validators.required),
@@ -31,12 +33,16 @@ export class CreateCandidateComponent implements OnInit {
 
   constructor(
     private candidateService: CandidateService,
-    private electionService: ElectionService
+    private electionService: ElectionService,
+    private partyService: PartyService
   ) {}
 
   ngOnInit(): void {
     this.electionService.getAllElections().subscribe((data: any[]) => {
       this.elections = data;
+    });
+    this.partyService.getAllParties().subscribe((data: any[]) => {
+      this.parties = data;
     });
   }
 

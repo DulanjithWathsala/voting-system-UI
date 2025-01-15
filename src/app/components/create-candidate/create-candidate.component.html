@@ -66,8 +66,9 @@
                                 <select id="party" formControlName="partyId"
                                     class="form-select form-select-sm border-0 shadow-sm">
                                     <option value="" disabled selected>Select Party</option>
-                                    <option value="1">Party 1</option>
-                                    <option value="2">Party 2</option>
+                                    @for (party of parties; track party.id) {
+                                    <option [value]="party.id">{{party.name}}</option>
+                                    }
                                 </select>
                                 <div *ngIf="createCandidateForm.controls.partyId?.touched && createCandidateForm.controls.partyId?.invalid"
                                     class="text-danger">
