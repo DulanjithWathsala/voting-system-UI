@@ -10,6 +10,14 @@ export class PartyService {
 
   constructor(private http: HttpClient) {}
 
+  create(requestBody: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/create`, requestBody, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
+
   getAllParties(): Observable<any> {
     return this.http.get(`${this.baseUrl}/retrieve`, {
       headers: new HttpHeaders({

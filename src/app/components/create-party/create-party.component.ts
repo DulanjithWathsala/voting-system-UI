@@ -6,6 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { PartyService } from '../../services/party.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-create-party',
@@ -20,5 +22,25 @@ export class CreatePartyComponent {
     registrationNumber: new FormControl('', Validators.required),
   });
 
-  onSubmit(): void {}
+  constructor(private partyService: PartyService) {}
+
+  onSubmit(): void {
+    if (this.createPartyForm.valid) {
+      this.partyService.create(this.createPartyForm.value).subscribe({
+        next: (data) => {
+          Swal.fire({
+            title: 'Party created successfully!',
+            icon: 'success',
+          });
+          this.createPartyForm.reset();
+        },
+        error: (error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Could not create party. Try again!',
+          });
+        },
+      });
+    }
+  }
 }
