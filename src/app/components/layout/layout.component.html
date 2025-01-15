@@ -36,6 +36,21 @@
                     Manage Candidates
                 </a>
             </li>
+            <hr>
+            <li>
+                <a routerLink="/layout/create-party" routerLinkActive="active" class="nav-link text-white"
+                    [class.active]="router.url === '/layout/create-party'">
+                    <i class="bi-flag me-2"></i>
+                    Create Party
+                </a>
+            </li>
+            <li>
+                <a routerLink="/layout/manage-parties" routerLinkActive="active" class="nav-link text-white"
+                    [class.active]="router.url === '/layout/manage-parties'">
+                    <i class="bi-list-task me-2"></i>
+                    Manage Parties
+                </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown">
