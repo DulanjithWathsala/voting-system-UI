@@ -35,6 +35,7 @@
                         <p><strong>NIC:</strong> {{ candidate.nic }}</p>
                         <p><strong>Full Name:</strong> {{ candidate.fullName }}</p>
                         <p><strong>Position:</strong> {{ candidate.position }}</p>
+                        <p><strong>Party:</strong> {{ candidate.party.name }}</p>
                     </div>
                     <!-- Delete Button -->
                     <button class="btn btn-outline-danger" (click)="deleteCandidate(candidate.id)">
