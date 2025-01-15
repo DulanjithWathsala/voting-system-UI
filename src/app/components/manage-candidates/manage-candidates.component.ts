@@ -66,7 +66,9 @@ export class ManageCandidatesComponent implements OnInit {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         this.candidateService.deleteCandidate(candidateId).subscribe(() => {
-          Swal.fire('Delete successful!', '', 'success');
+          Swal.fire('Delete successful!', '', 'success').then(() => {
+            window.location.reload();
+          });
         });
       } else if (result.isDenied) {
         Swal.fire('Delete canceled!', '', 'info');
