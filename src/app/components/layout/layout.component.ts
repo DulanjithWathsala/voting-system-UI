@@ -30,12 +30,11 @@ export class LayoutComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem('authToken');
+        this.router.navigate(['']);
         Swal.fire({
           title: 'Success!',
           text: 'signed out successfully.',
           icon: 'success',
-        }).then(() => {
-          this.router.navigate(['']);
         });
       }
     });
