@@ -37,4 +37,12 @@ export class PartyService {
       }
     );
   }
+
+  deleteParty(partyId: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/delete/${partyId}`, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }

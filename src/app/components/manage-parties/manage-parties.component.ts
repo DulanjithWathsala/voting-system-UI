@@ -28,6 +28,10 @@ export class ManagePartiesComponent implements OnInit {
   constructor(private partyService: PartyService) {}
 
   ngOnInit(): void {
+    this.fetchParties();
+  }
+
+  fetchParties(): void {
     this.partyService.getAllParties().subscribe((data: any[]) => {
       this.parties = data;
     });
@@ -43,7 +47,25 @@ export class ManagePartiesComponent implements OnInit {
     });
   }
 
-  OnDeleteParty(partyId: any): any {}
+  OnDeleteParty(partyId: any): any {
+    Swal.fire({
+      title: 'Do you want to Delete current party details?',
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      denyButtonText: `Don't delete`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.partyService.deleteParty(partyId).subscribe(() => {
+          Swal.fire('Delete successful!', '', 'success');
+          this.fetchParties();
+        });
+      } else if (result.isDenied) {
+        Swal.fire('Delete canceled!', '', 'info');
+      }
+    });
+  }
 
   onUpdate(): void {
     if (this.updatePartyForm.valid) {
