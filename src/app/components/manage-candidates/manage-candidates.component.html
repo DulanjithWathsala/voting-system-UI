@@ -1,15 +1,15 @@
 <div class="container-fluid">
     <!-- Heading -->
-    <div class="row">
+    <div class="row sticky-top">
         <div class="col-md-12">
             <h3 class="text-center text-success my-4">Manage Candidates</h3>
         </div>
     </div>
 
     <!-- Election Selection Section -->
-    <div class="row mb-4">
+    <div class="row sticky-top bg-white">
         <div class="col-md-8 offset-md-2">
-            <div class="input-group">
+            <div class="input-group mb-3">
                 <select id="election-select" #selectedElection="ngModel" [(ngModel)]="selectedElectionId"
                     class="form-select border-0 shadow-sm" required>
                     <option value="" disabled selected>Select Election</option>
@@ -26,21 +26,24 @@
     </div>
 
     <!-- Candidates List -->
-    <div class="row">
-        <div *ngFor="let candidate of candidates" class="col-md-12 mb-4">
-            <div class="card shadow-sm border-0">
-                <div class="card-body d-flex justify-content-between align-items-center">
-                    <!-- Candidate Details -->
-                    <div>
-                        <p><strong>NIC:</strong> {{ candidate.nic }}</p>
-                        <p><strong>Full Name:</strong> {{ candidate.fullName }}</p>
-                        <p><strong>Position:</strong> {{ candidate.position }}</p>
-                        <p><strong>Party:</strong> {{ candidate.party.name }}</p>
+    <div class="scroll-container">
+        <div class="row">
+            <div *ngFor="let candidate of candidates" class="col-md-12 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <!-- Candidate Details -->
+                        <div>
+                            <p><strong>NIC:</strong> {{ candidate.nic }}</p>
+                            <p><strong>Full Name:</strong> {{ candidate.fullName }}</p>
+                            <p><strong>Position:</strong> {{ candidate.position }}</p>
+                            <p><strong>Party:</strong> {{ candidate.party.name }}</p>
+                            <p><strong>Symbol:</strong> {{ candidate.party.symbol }}</p>
+                        </div>
+                        <!-- Delete Button -->
+                        <button class="btn btn-outline-danger" (click)="deleteCandidate(candidate.id)">
+                            <i class="bi-trash"></i> <!-- Delete Icon -->
+                        </button>
                     </div>
-                    <!-- Delete Button -->
-                    <button class="btn btn-outline-danger" (click)="deleteCandidate(candidate.id)">
-                        <i class="bi-trash"></i> <!-- Delete Icon -->
-                    </button>
                 </div>
             </div>
         </div>

@@ -9,6 +9,7 @@ import { CreateCandidateComponent } from './components/create-candidate/create-c
 import { ManageCandidatesComponent } from './components/manage-candidates/manage-candidates.component';
 import { CreatePartyComponent } from './components/create-party/create-party.component';
 import { ManagePartiesComponent } from './components/manage-parties/manage-parties.component';
+import { VoteComponent } from './components/vote/vote.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,7 @@ export const routes: Routes = [
       { path: 'manage-candidates', component: ManageCandidatesComponent },
       { path: 'create-party', component: CreatePartyComponent },
       { path: 'manage-parties', component: ManagePartiesComponent },
+      { path: 'vote', component: VoteComponent },
     ],
   },
 ];

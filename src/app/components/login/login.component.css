@@ -1,16 +1,10 @@
-/* Background gradient for the header */
 .card-header {
-  background: linear-gradient(
-    90deg,
-    #003973,
-    #00c6ff
-  ); /* Dark blue to light blue gradient */
-  color: white; /* Contrast text color */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* Make text pop */
-  border-bottom: 4px solid rgba(0, 0, 0, 0.1); /* Subtle border for separation */
+  background: linear-gradient(90deg, #003973, #00c6ff);
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.1);
 }
 
-/* Header text styling */
 .card-header h4 {
   font-size: 1.8rem;
   letter-spacing: 1px;
@@ -21,14 +15,12 @@
   opacity: 0.9;
 }
 
-/* Card styling */
 .card {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Form control styling */
 .form-control {
   border-radius: 8px;
   padding: 12px;
@@ -40,7 +32,6 @@
   font-style: italic;
 }
 
-/* Button styling */
 .btn-primary {
   background-color: #2575fc;
   border-color: #2575fc;
@@ -52,7 +43,6 @@
   border-color: #1e5bbd;
 }
 
-/* Link styling */
 .btn-link {
   font-weight: 600;
   text-decoration: none;
@@ -62,7 +52,6 @@
   text-decoration: underline;
 }
 
-/* Page background */
 body {
   background-color: #f3f4f6;
 }

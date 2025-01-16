@@ -1,15 +1,12 @@
-/* Ensure the form takes full height without overflow */
 .container-fluid {
   padding-top: 0;
   overflow: hidden;
 }
 
-/* Gradient style for the button */
 .btn-gradient {
   background: linear-gradient(135deg, #00b4d8, #0077b6);
 }
 
-/* Reduce the font size for form labels and inputs */
 .form-label {
   font-size: 0.9rem;
 }
@@ -19,7 +16,6 @@
   font-size: 0.9rem;
 }
 
-/* Optional: Adjust the card header and body padding */
 .card-header {
   padding: 1rem;
 }
