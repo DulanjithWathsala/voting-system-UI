@@ -1,16 +1,25 @@
+img.register-logo {
+  max-width: 80px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .card {
-  border-radius: 10px;
-  overflow: hidden;
+  border: none;
 }
 
 .card-header {
-  border-bottom: none;
+  background: linear-gradient(to right, #007bff, #0056b3);
 }
 
-.btn-block {
-  width: 100%;
+.card-body {
+  padding: 2rem;
 }
 
-.img-fluid {
-  margin: auto;
+.form-control {
+  padding: 0.875rem 1.25rem;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
 }
