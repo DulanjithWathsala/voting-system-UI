@@ -1,25 +1,34 @@
+/* Logo image styling */
 img.register-logo {
   max-width: 80px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Card styling */
 .card {
   border: none;
 }
 
+/* Header with gradient */
 .card-header {
-  background: linear-gradient(to right, #007bff, #0056b3);
+  background: linear-gradient(
+    90deg,
+    #003973,
+    #00c6ff
+  ); /* Dark blue to light blue gradient */
+  color: white; /* Contrast text color */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); /* Make text pop */
+  border-bottom: 4px solid rgba(0, 0, 0, 0.1); /* Subtle border for separation */
 }
 
+/* Card body padding */
 .card-body {
   padding: 2rem;
 }
 
+/* Form control styling */
 .form-control {
   padding: 0.875rem 1.25rem;
-}
-
-.btn {
-  font-size: 1rem;
-  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
 }
