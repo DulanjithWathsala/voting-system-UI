@@ -1,14 +1,24 @@
 <div class="container-fluid">
+    <!-- Loading Screen (only visible when loading is true) -->
+    <div *ngIf="loading" class="loading-overlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p> Sending OTP...</p>
+    </div>
+
     <!-- First Div: Verification -->
     <div *ngIf="!isVerified" class="alert alert-warning p-4">
         <h5 class="text-danger">You are not verified!</h5>
         <p class="mb-3">Please verify your email before voting.</p>
         <p><strong>Email:</strong> {{ currentUserEmail }}</p>
-        <button class="btn btn-primary mb-3" (click)="generateOtp()">Generate OTP</button>
-        <div class="mb-3">
-            <input type="text" [(ngModel)]="otp" class="form-control" placeholder="Enter OTP" />
+        <button class="btn btn-primary mb-3" (click)="generateOtp()" [disabled]="isGenorated">Generate OTP</button>
+        <div *ngIf="isGenorated">
+            <div class="mb-3">
+                <input type="text" [(ngModel)]="otp" class="form-control" placeholder="Enter OTP" />
+            </div>
+            <button class="btn btn-success" (click)="verifyOtp()">Verify</button>
         </div>
-        <button class="btn btn-success" (click)="verifyOtp()">Verify</button>
     </div>
 
     <!-- Second Div: Already Voted -->

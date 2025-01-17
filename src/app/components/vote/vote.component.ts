@@ -14,6 +14,7 @@ import { ElectionService } from '../../services/election.service';
 import { BallotService } from '../../services/ballot.service';
 import { PartyService } from '../../services/party.service';
 import { CandidateService } from '../../services/candidate.service';
+import { OtpService } from '../../services/otp.service';
 
 @Component({
   selector: 'app-vote',
@@ -25,8 +26,10 @@ export class VoteComponent implements OnInit {
   currentUserEmail: any;
   selectedElectionId: any;
 
-  isVerified: boolean = true;
+  loading: boolean = false;
+  isVerified: boolean = false;
   isVoted: boolean = false;
+  isGenorated: boolean = false;
 
   otp: string = '';
 
@@ -44,7 +47,8 @@ export class VoteComponent implements OnInit {
     private voteService: VoteService,
     private electionService: ElectionService,
     private ballotService: BallotService,
-    private candidateService: CandidateService
+    private candidateService: CandidateService,
+    private otpService: OtpService
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +91,26 @@ export class VoteComponent implements OnInit {
     this.fetchBallots();
   }
 
-  generateOtp(): void {}
+  generateOtp(): void {
+    this.loading = true;
+    this.otpService.generateOtp(this.currentUserEmail).subscribe({
+      next: (data) => {
+        this.loading = false;
+        this.isGenorated = true;
+        Swal.fire({
+          title: 'Otp sent your email!',
+          icon: 'success',
+        });
+      },
+      error: (error) => {
+        this.loading = false;
+        Swal.fire({
+          title: 'Otp could not sent. Try again!',
+          icon: 'error',
+        });
+      },
+    });
+  }
 
   verifyOtp(): void {}
 
