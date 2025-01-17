@@ -13,6 +13,7 @@ import {
 import { ElectionService } from '../../services/election.service';
 import { BallotService } from '../../services/ballot.service';
 import { PartyService } from '../../services/party.service';
+import { CandidateService } from '../../services/candidate.service';
 
 @Component({
   selector: 'app-vote',
@@ -37,21 +38,19 @@ export class VoteComponent implements OnInit {
   voteForm = new FormGroup({
     election: new FormControl('', Validators.required),
     ballot: new FormControl('', Validators.required),
-    party: new FormControl('', Validators.required),
   });
 
   constructor(
     private voteService: VoteService,
     private electionService: ElectionService,
     private ballotService: BallotService,
-    private partyService: PartyService
+    private candidateService: CandidateService
   ) {}
 
   ngOnInit(): void {
     this.currentUserEmail = localStorage.getItem('currentEmail');
 
     this.fetchElections();
-    this.fetchParties();
 
     // this.voteService.checkUserIsVerified(this.currentUserEmail).subscribe({
     //   next: (data) => {
@@ -81,12 +80,6 @@ export class VoteComponent implements OnInit {
       });
   }
 
-  fetchParties(): void {
-    this.partyService.getAllParties().subscribe((data: any[]) => {
-      this.parties = data;
-    });
-  }
-
   onElectionChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.selectedElectionId = target.value;
@@ -99,8 +92,26 @@ export class VoteComponent implements OnInit {
   verifyOtp(): void {}
 
   showCandidates(): void {
+    this.candidates = [];
     if (this.voteForm.valid) {
-      console.log(this.voteForm.value);
+      this.candidateService
+        .retrieveCandidesByElectionId(this.voteForm.value.election)
+        .subscribe({
+          next: (data: any[]) => {
+            this.candidates = data;
+
+            Swal.fire({
+              title: 'Candiates Loaded',
+              icon: 'success',
+            });
+          },
+          error: (error) => {
+            Swal.fire({
+              title: 'Candiates Loading failed. Try again!',
+              icon: 'error',
+            });
+          },
+        });
     }
   }
 

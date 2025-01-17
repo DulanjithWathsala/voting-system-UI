@@ -54,25 +54,10 @@
                 </div>
             </div>
 
-            <!-- Second Row (Party Select and Show Candidates Button) -->
+            <!-- Show Candidates Button -->
             <div class="row mb-3">
-                <!-- Party Select -->
-                <div class="col-md-8">
-                    <label for="party" class="form-label fs-6">Select Party</label>
-                    <select id="party" formControlName="party" class="form-select form-select-sm border-0 shadow-sm">
-                        <option value="" disabled>Select Party</option>
-                        <option *ngFor="let party of parties" [value]="party.id">
-                            {{ party.name }}
-                        </option>
-                    </select>
-                    <div *ngIf="voteForm.get('party')?.invalid && voteForm.get('party')?.touched" class="text-danger">
-                        Party is required.
-                    </div>
-                </div>
-
-                <!-- Show Candidates Button -->
-                <div class="col-md-4 d-flex align-items-end">
-                    <button type="button" class="btn btn-primary w-100 shadow-sm" (click)="showCandidates()"
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary shadow-sm" (click)="showCandidates()"
                         [disabled]="voteForm.invalid">
                         Show Candidates
                     </button>
@@ -81,12 +66,14 @@
         </form>
 
         <!-- Candidates List with Scroll Bar -->
-        <div class="scroll-container mt-3">
+        <div class="scroll-container mt-5">
             <div *ngFor="let candidate of candidates" class="card mb-3 p-3 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <p><strong>Name:</strong> {{ candidate.name }}</p>
+                        <p><strong>Name:</strong> {{ candidate.fullName }}</p>
                         <p><strong>Position:</strong> {{ candidate.position }}</p>
+                        <p><strong>Party:</strong> <span class="text-primary"> {{ candidate.party.name }} </span></p>
+                        <p><strong>Symbol:</strong> <span class="text-success"> {{ candidate.party.symbol }} </span></p>
                     </div>
                     <button class="btn btn-success" (click)="castVote(candidate.id)">
                         Cast Vote
