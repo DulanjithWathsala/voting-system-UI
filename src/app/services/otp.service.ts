@@ -18,4 +18,13 @@ export class OtpService {
       }),
     });
   }
+
+  verifyOtp(email: string, otp: string): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/verify`, null, {
+      params: new HttpParams().set('email', email).set('otp', otp),
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }

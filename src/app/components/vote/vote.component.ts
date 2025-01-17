@@ -56,18 +56,19 @@ export class VoteComponent implements OnInit {
 
     this.fetchElections();
 
-    // this.voteService.checkUserIsVerified(this.currentUserEmail).subscribe({
-    //   next: (data) => {
-    //     console.log(data);
-    //   },
-    //   error: (error) => {
-    //     Swal.fire({
-    //       title: 'Not verified!',
-    //       text: 'Please verify your email to vote.',
-    //       icon: 'warning',
-    //     });
-    //   },
-    // });
+    this.voteService.checkUserIsVerified(this.currentUserEmail).subscribe({
+      next: (data) => {
+        this.isVerified = true;
+        console.log(data);
+      },
+      error: (error) => {
+        Swal.fire({
+          title: 'Not verified!',
+          text: 'Please verify your email to vote.',
+          icon: 'warning',
+        });
+      },
+    });
   }
 
   fetchElections(): void {
@@ -112,7 +113,30 @@ export class VoteComponent implements OnInit {
     });
   }
 
-  verifyOtp(): void {}
+  verifyOtp(): void {
+    if (this.otp === '') {
+      Swal.fire({
+        title: 'Otp cant be empty!',
+        icon: 'warning',
+      });
+    } else {
+      this.otpService.verifyOtp(this.currentUserEmail, this.otp).subscribe({
+        next: (data) => {
+          this.isVerified = true;
+          Swal.fire({
+            title: 'Verification Successfull!',
+            icon: 'success',
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Verification failed. Try again!',
+            icon: 'error',
+          });
+        },
+      });
+    }
+  }
 
   showCandidates(): void {
     this.candidates = [];
