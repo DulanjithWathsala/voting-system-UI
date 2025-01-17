@@ -10,6 +10,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ElectionService } from '../../services/election.service';
+import { BallotService } from '../../services/ballot.service';
+import { PartyService } from '../../services/party.service';
 
 @Component({
   selector: 'app-vote',
@@ -19,6 +22,7 @@ import {
 })
 export class VoteComponent implements OnInit {
   currentUserEmail: any;
+  selectedElectionId: any;
 
   isVerified: boolean = true;
   isVoted: boolean = false;
@@ -37,12 +41,17 @@ export class VoteComponent implements OnInit {
   });
 
   constructor(
-    private dataService: DataService,
-    private voteService: VoteService
+    private voteService: VoteService,
+    private electionService: ElectionService,
+    private ballotService: BallotService,
+    private partyService: PartyService
   ) {}
 
   ngOnInit(): void {
     this.currentUserEmail = localStorage.getItem('currentEmail');
+
+    this.fetchElections();
+    this.fetchParties();
 
     // this.voteService.checkUserIsVerified(this.currentUserEmail).subscribe({
     //   next: (data) => {
@@ -58,11 +67,42 @@ export class VoteComponent implements OnInit {
     // });
   }
 
+  fetchElections(): void {
+    this.electionService.getAllElections().subscribe((data: any[]) => {
+      this.elections = data;
+    });
+  }
+
+  fetchBallots(): void {
+    this.ballotService
+      .retrieveBallotByElectionId(this.selectedElectionId)
+      .subscribe((data: any[]) => {
+        this.ballots = data;
+      });
+  }
+
+  fetchParties(): void {
+    this.partyService.getAllParties().subscribe((data: any[]) => {
+      this.parties = data;
+    });
+  }
+
+  onElectionChange(event: Event): void {
+    const target = event.target as HTMLSelectElement;
+    this.selectedElectionId = target.value;
+
+    this.fetchBallots();
+  }
+
   generateOtp(): void {}
 
   verifyOtp(): void {}
 
-  showCandidates(): void {}
+  showCandidates(): void {
+    if (this.voteForm.valid) {
+      console.log(this.voteForm.value);
+    }
+  }
 
   castVote(candidateId: string): void {}
 

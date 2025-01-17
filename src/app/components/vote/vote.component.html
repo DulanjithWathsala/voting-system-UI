@@ -27,7 +27,7 @@
                 <div class="col-md-6">
                     <label for="election" class="form-label fs-6">Select Election</label>
                     <select id="election" formControlName="election"
-                        class="form-select form-select-sm border-0 shadow-sm">
+                        class="form-select form-select-sm border-0 shadow-sm" (change)="onElectionChange($event)">
                         <option value="" disabled>Select Election</option>
                         <option *ngFor="let election of elections" [value]="election.id">
                             {{ election.title }}
