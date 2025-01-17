@@ -36,10 +36,7 @@ export class LoginComponent {
           console.log(data);
 
           localStorage.setItem('authToken', `${data.jwtToken}`);
-          this.dataService.setData(
-            'currentUserEmail',
-            this.loginForm.value.username
-          );
+          localStorage.setItem('currentEmail', this.loginForm.value.username!);
           Swal.fire({
             title: 'Good job!',
             text: 'Login successful!',

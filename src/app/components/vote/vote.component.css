@@ -1,0 +1,25 @@
+/* Scroll container styling for candidates list */
+.scroll-container {
+  max-height: 50vh; /* Adjust the height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 8px; /* Avoid overlapping with scrollbar */
+}
+
+/* Optional: For smooth custom scroll bar */
+.scroll-container::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Darker thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly darker on hover */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1); /* Light background for the track */
+  border-radius: 10px;
+}
