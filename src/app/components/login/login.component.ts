@@ -9,6 +9,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,11 @@ import Swal from 'sweetalert2';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private dataService: DataService
+  ) {}
 
   loginForm = new FormGroup({
     username: new FormControl('', [Validators.required, Validators.email]),
@@ -31,7 +36,10 @@ export class LoginComponent {
           console.log(data);
 
           localStorage.setItem('authToken', `${data.jwtToken}`);
-
+          this.dataService.setData(
+            'currentUserEmail',
+            this.loginForm.value.username
+          );
           Swal.fire({
             title: 'Good job!',
             text: 'Login successful!',
