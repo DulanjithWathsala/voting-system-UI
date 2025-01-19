@@ -34,13 +34,11 @@ export class VoteComponent implements OnInit {
   otp: string = '';
 
   elections: any[] = [];
-  ballots: any[] = [];
   parties: any[] = [];
   candidates: any[] = [];
 
   voteForm = new FormGroup({
     election: new FormControl('', Validators.required),
-    ballot: new FormControl('', Validators.required),
   });
 
   constructor(
@@ -77,19 +75,9 @@ export class VoteComponent implements OnInit {
     });
   }
 
-  fetchBallots(): void {
-    this.ballotService
-      .retrieveBallotByElectionId(this.selectedElectionId)
-      .subscribe((data: any[]) => {
-        this.ballots = data;
-      });
-  }
-
   onElectionChange(event: Event): void {
     const target = event.target as HTMLSelectElement;
     this.selectedElectionId = target.value;
-
-    this.fetchBallots();
   }
 
   generateOtp(): void {
