@@ -44,7 +44,6 @@ export class VoteComponent implements OnInit {
   constructor(
     private voteService: VoteService,
     private electionService: ElectionService,
-    private ballotService: BallotService,
     private candidateService: CandidateService,
     private otpService: OtpService
   ) {}
