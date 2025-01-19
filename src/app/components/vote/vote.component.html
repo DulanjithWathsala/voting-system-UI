@@ -30,7 +30,7 @@
     <!-- Third Div: Voting Section -->
     <div *ngIf="isVerified && !isVoted" class="voting-section p-4 border rounded">
         <!-- Reactive Form -->
-        <form [formGroup]="voteForm" (ngSubmit)="onSubmitVote()">
+        <form [formGroup]="voteForm">
             <!-- First Row -->
             <div class="row mb-3">
                 <!-- Election Select -->

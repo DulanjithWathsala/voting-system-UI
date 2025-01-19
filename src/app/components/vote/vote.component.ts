@@ -24,6 +24,7 @@ import { OtpService } from '../../services/otp.service';
 })
 export class VoteComponent implements OnInit {
   currentUserEmail: any;
+  currentUserNic: any;
   selectedElectionId: any;
 
   loading: boolean = false;
@@ -53,6 +54,12 @@ export class VoteComponent implements OnInit {
 
     this.fetchElections();
 
+    this.voteService
+      .getUserDetailsByEmail(this.currentUserEmail)
+      .subscribe((data: any) => {
+        this.currentUserNic = data.nic;
+      });
+
     this.voteService.checkUserIsVerified(this.currentUserEmail).subscribe({
       next: (data) => {
         this.isVerified = true;
@@ -64,6 +71,15 @@ export class VoteComponent implements OnInit {
           text: 'Please verify your email to vote.',
           icon: 'warning',
         });
+      },
+    });
+
+    this.voteService.checkUserIsCasted(this.currentUserEmail).subscribe({
+      next: (data: boolean) => {
+        this.isVoted = data;
+      },
+      error: (error) => {
+        console.log(error);
       },
     });
   }
@@ -149,7 +165,48 @@ export class VoteComponent implements OnInit {
     }
   }
 
-  castVote(candidateId: string): void {}
+  castVote(candidateId: string): void {
+    console.log(candidateId);
 
-  onSubmitVote(): void {}
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Vote!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const requestBody = {
+          userNic: this.currentUserNic,
+          candidateId,
+        };
+
+        this.voteService.castVote(requestBody).subscribe({
+          next: (data) => {
+            this.isVoted = true;
+            Swal.fire({
+              title: 'Good job!',
+              text: 'Your vote has been captured!',
+              icon: 'success',
+            });
+          },
+          error: (error) => {
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Failed to vote. Try again!',
+              icon: 'error',
+            });
+          },
+        });
+
+        Swal.fire({
+          title: 'Voted!',
+          text: 'Your vote has been casted.',
+          icon: 'success',
+        });
+      }
+    });
+  }
 }
