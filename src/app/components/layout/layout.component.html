@@ -9,50 +9,50 @@
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a routerLink="/layout/create-election" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/create-election'">
+                <a *ngIf="currentUserRole != 'VOTER'" routerLink="/layout/create-election" routerLinkActive="active"
+                    class="nav-link text-white" [class.active]="router.url === '/layout/create-election'">
                     <i class="bi-house me-2"></i>
                     Create Election
                 </a>
             </li>
             <li>
-                <a routerLink="/layout/view-elections" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/view-elections'">
+                <a *ngIf="currentUserRole != 'VOTER'" routerLink="/layout/view-elections" routerLinkActive="active"
+                    class="nav-link text-white" [class.active]="router.url === '/layout/view-elections'">
                     <i class="bi-table me-2"></i>
                     Manage Elections
                 </a>
             </li>
-            <hr>
+            <hr *ngIf="currentUserRole != 'VOTER'">
             <li>
-                <a routerLink="/layout/create-candidate" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/create-candidate'">
+                <a *ngIf="currentUserRole != 'VOTER'" routerLink="/layout/create-candidate" routerLinkActive="active"
+                    class="nav-link text-white" [class.active]="router.url === '/layout/create-candidate'">
                     <i class="bi-person-plus me-2"></i>
                     Create Candidate
                 </a>
             </li>
             <li>
-                <a routerLink="/layout/manage-candidates" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/manage-candidates'">
+                <a *ngIf="currentUserRole != 'VOTER'" routerLink="/layout/manage-candidates" routerLinkActive="active"
+                    class="nav-link text-white" [class.active]="router.url === '/layout/manage-candidates'">
                     <i class="bi-people me-2"></i>
                     Manage Candidates
                 </a>
             </li>
-            <hr>
+            <hr *ngIf="currentUserRole != 'VOTER'">
             <li>
-                <a routerLink="/layout/create-party" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/create-party'">
+                <a *ngIf="currentUserRole != 'VOTER'" routerLink="/layout/create-party" routerLinkActive="active"
+                    class="nav-link text-white" [class.active]="router.url === '/layout/create-party'">
                     <i class="bi-flag me-2"></i>
                     Create Party
                 </a>
             </li>
             <li>
-                <a routerLink="/layout/manage-parties" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/manage-parties'">
+                <a *ngIf="currentUserRole != 'VOTER'" routerLink="/layout/manage-parties" routerLinkActive="active"
+                    class="nav-link text-white" [class.active]="router.url === '/layout/manage-parties'">
                     <i class="bi-list-task me-2"></i>
                     Manage Parties
                 </a>
             </li>
-            <hr>
+            <hr *ngIf="currentUserRole != 'VOTER'">
             <li>
                 <a routerLink="/layout/vote" routerLinkActive="active" class="nav-link text-white"
                     [class.active]="router.url === '/layout/vote'">
