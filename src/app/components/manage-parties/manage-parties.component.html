@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <!-- Loop through the parties list -->
+        <div *ngFor="let party of parties" class="col-md-12 mb-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-body d-flex">
+                    <!-- Party Details -->
+                    <div class="flex-grow-1">
+                        <h5 class="card-title" [style.color]="'#4CAF50'">
+                            🏛️ {{ party.name }}
+                        </h5>
+                        <p class="card-text"><strong>Symbol:</strong> {{ party.symbol }}</p>
+                        <p class="mb-2"><strong>Registration Number:</strong> {{ party.registrationNumber }}</p>
+                    </div>
+
+                    <!-- Actions (Update, Delete) -->
+                    <div class="ms-3 d-flex flex-column justify-content-between">
+                        <button class="btn btn-outline-secondary mb-2" data-bs-toggle="modal"
+                            data-bs-target="#updatePartyModal" (click)="onSelectParty(party)">
+                            <i class="bi bi-pencil-square"></i> <!-- Update Icon -->
+                            Update
+                        </button>
+                        <button class="btn btn-outline-danger" (click)="OnDeleteParty(party.id)">
+                            <i class="bi bi-trash"></i> <!-- Delete Icon -->
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Party Modal -->
+<div class="modal fade" id="updatePartyModal" tabindex="-1" aria-labelledby="updatePartyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-success" id="updatePartyLabel">Update Party</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body p-4">
+                    <form [formGroup]="updatePartyForm" (ngSubmit)="onUpdate()">
+                        <div class="mb-3">
+                            <label for="party-name" class="form-label fs-6">Party Name</label>
+                            <input type="text" formControlName="name" class="form-control border-0 shadow-sm"
+                                id="party-name" placeholder="Enter party name" required>
+                            <div *ngIf="updatePartyForm.controls.name?.touched && updatePartyForm.controls.name?.invalid"
+                                class="text-danger">
+                                <small *ngIf="updatePartyForm.controls.name?.errors?.['required']">Party name is
+                                    required.</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="party-symbol" class="form-label fs-6">Symbol</label>
+                            <input type="text" formControlName="symbol" class="form-control border-0 shadow-sm"
+                                id="party-symbol" placeholder="Enter party symbol" required>
+                            <div *ngIf="updatePartyForm.controls.symbol?.touched && updatePartyForm.controls.symbol?.invalid"
+                                class="text-danger">
+                                <small *ngIf="updatePartyForm.controls.symbol?.errors?.['required']">Symbol is
+                                    required.</small>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registration-number" class="form-label fs-6">Registration Number</label>
+                            <input type="text" formControlName="registrationNumber"
+                                class="form-control border-0 shadow-sm" id="registration-number"
+                                placeholder="Enter registration number" required>
+                            <div *ngIf="updatePartyForm.controls.registrationNumber?.touched && updatePartyForm.controls.registrationNumber?.invalid"
+                                class="text-danger">
+                                <small
+                                    *ngIf="updatePartyForm.controls.registrationNumber?.errors?.['required']">Registration
+                                    number is required.</small>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="submit"
+                                class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
