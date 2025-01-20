@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ElectionService {
-  private baseUrl: string = 'http://localhost:8080/api/election';
+export class PartyService {
+  private baseUrl: string = 'http://localhost:8080/api/party';
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +18,7 @@ export class ElectionService {
     });
   }
 
-  getAllElections(): Observable<any> {
+  getAllParties(): Observable<any> {
     return this.http.get(`${this.baseUrl}/retrieve`, {
       headers: new HttpHeaders({
         Authorization: `${localStorage.getItem('authToken')}`,
@@ -26,9 +26,9 @@ export class ElectionService {
     });
   }
 
-  updateElectionDetails(electionId: any, requestBody: any): Observable<any> {
+  updatePartyDetails(partyId: any, requestBody: any): Observable<any> {
     return this.http.put<any>(
-      `${this.baseUrl}/update/${electionId}`,
+      `${this.baseUrl}/update/${partyId}`,
       requestBody,
       {
         headers: new HttpHeaders({
@@ -38,35 +38,11 @@ export class ElectionService {
     );
   }
 
-  deleteElection(electionId: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/delete/${electionId}`, {
+  deleteParty(partyId: any): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/delete/${partyId}`, {
       headers: new HttpHeaders({
         Authorization: `${localStorage.getItem('authToken')}`,
       }),
     });
-  }
-
-  startElection(electionId: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/start/${electionId}`,
-      {},
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
-    );
-  }
-
-  endElection(electionId: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/end/${electionId}`,
-      {},
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
-    );
   }
 }

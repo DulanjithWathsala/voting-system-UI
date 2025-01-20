@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ElectionService } from '../../services/election.service';
 import Swal from 'sweetalert2';
-import { Modal } from 'bootstrap';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -9,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-view-elections',
@@ -28,7 +28,10 @@ export class ViewElectionsComponent implements OnInit {
     status: new FormControl('', Validators.required),
   });
 
-  constructor(private electionService: ElectionService) {}
+  constructor(
+    private electionService: ElectionService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchElections();
@@ -124,6 +127,78 @@ export class ViewElectionsComponent implements OnInit {
         });
       } else if (result.isDenied) {
         Swal.fire('Delete canceled!', '', 'info');
+      }
+    });
+  }
+
+  ballotsOnClick(election: any): void {
+    this.router.navigate(['/ballots'], {
+      queryParams: { data: btoa(JSON.stringify(election)) },
+    });
+  }
+
+  start(election: any): void {
+    Swal.fire({
+      title: 'Confirm',
+      text: 'Do you want to start election?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, start it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.electionService.startElection(election.id).subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Sucess!',
+              text: 'Election Started!',
+              icon: 'success',
+            });
+
+            this.fetchElections();
+          },
+          error: (error) => {
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Could not start the election',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
+  }
+
+  end(election: any): void {
+    Swal.fire({
+      title: 'Confirm',
+      text: 'Do you want to end election?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, end it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.electionService.endElection(election.id).subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Sucess!',
+              text: 'Election ended!',
+              icon: 'success',
+            });
+
+            this.fetchElections();
+          },
+          error: (error) => {
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Could not end the election',
+              icon: 'error',
+            });
+          },
+        });
       }
     });
   }

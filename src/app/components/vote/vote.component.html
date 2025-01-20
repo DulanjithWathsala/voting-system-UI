@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <!-- Loading Screen (only visible when loading is true) -->
+    <div *ngIf="loading" class="loading-overlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p> Sending OTP...</p>
+    </div>
+
+    <!-- First Div: Verification -->
+    <div *ngIf="!isVerified" class="alert alert-warning p-4">
+        <h5 class="text-danger">You are not verified!</h5>
+        <p class="mb-3">Please verify your email before voting.</p>
+        <p><strong>Email:</strong> {{ currentUserEmail }}</p>
+        <button class="btn btn-primary mb-3" (click)="generateOtp()" [disabled]="isGenorated">Generate OTP</button>
+        <div *ngIf="isGenorated">
+            <div class="mb-3">
+                <input type="text" [(ngModel)]="otp" class="form-control" placeholder="Enter OTP" />
+            </div>
+            <button class="btn btn-success" (click)="verifyOtp()">Verify</button>
+        </div>
+    </div>
+
+    <!-- Second Div: Already Voted -->
+    <div *ngIf="isVoted" class="alert alert-info p-4">
+        <h5 class="text-primary">You have already voted!</h5>
+        <p>Thank you for participating in the election. Please check the election results later.</p>
+    </div>
+
+    <!-- Third Div: Voting Section -->
+    <div *ngIf="isVerified && !isVoted" class="voting-section p-4 border rounded">
+        <!-- Reactive Form -->
+        <form [formGroup]="voteForm">
+            <!-- First Row -->
+            <div class="row mb-3">
+                <!-- Election Select -->
+                <div class="col-md-6">
+                    <label for="election" class="form-label fs-6">Select Election</label>
+                    <select id="election" formControlName="election"
+                        class="form-select form-select-sm border-0 shadow-sm" (change)="onElectionChange($event)">
+                        <option value="" disabled>Select Election</option>
+                        <option *ngFor="let election of elections" [value]="election.id">
+                            {{ election.title }}
+                        </option>
+                    </select>
+                    <div *ngIf="voteForm.get('election')?.invalid && voteForm.get('election')?.touched"
+                        class="text-danger">
+                        Election is required.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Show Candidates Button -->
+            <div class="row mb-3">
+                <div class="col-md-12 d-flex justify-content-end">
+                    <button type="button" class="btn btn-primary shadow-sm" (click)="showCandidates()"
+                        [disabled]="voteForm.invalid">
+                        Show Candidates
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Candidates List with Scroll Bar -->
+        <div class="scroll-container mt-5">
+            <div *ngFor="let candidate of candidates" class="card mb-3 p-3 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <p><strong>Name:</strong> {{ candidate.fullName }}</p>
+                        <p><strong>Position:</strong> {{ candidate.position }}</p>
+                        <p><strong>Party:</strong> <span class="text-primary"> {{ candidate.party.name }} </span></p>
+                        <p><strong>Symbol:</strong> <span class="text-success"> {{ candidate.party.symbol }} </span></p>
+                    </div>
+                    <button class="btn btn-success" (click)="castVote(candidate.id)">
+                        Cast Vote
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
