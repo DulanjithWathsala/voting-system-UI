@@ -60,6 +60,14 @@
                     Vote
                 </a>
             </li>
+            <li>
+                <a *ngIf="currentUserRole === 'SYSTEM_ADMIN'" routerLink="/layout/election-admins"
+                    routerLinkActive="active" class="nav-link text-white"
+                    [class.active]="router.url === '/layout/election-admins'">
+                    <i class="bi-people me-2"></i>
+                    Manage Election Admins
+                </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown">
