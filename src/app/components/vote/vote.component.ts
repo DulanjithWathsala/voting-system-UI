@@ -11,8 +11,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ElectionService } from '../../services/election.service';
-import { BallotService } from '../../services/ballot.service';
-import { PartyService } from '../../services/party.service';
 import { CandidateService } from '../../services/candidate.service';
 import { OtpService } from '../../services/otp.service';
 
@@ -181,6 +179,9 @@ export class VoteComponent implements OnInit {
         const requestBody = {
           userNic: this.currentUserNic,
           candidateId,
+          election: {
+            id: this.selectedElectionId,
+          },
         };
 
         this.voteService.castVote(requestBody).subscribe({

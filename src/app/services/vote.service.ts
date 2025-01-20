@@ -52,4 +52,12 @@ export class VoteService {
       },
     });
   }
+
+  getResultsByElectionId(electionId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/results/${electionId}`, {
+      headers: {
+        Authorization: `${localStorage.getItem('authToken')}`,
+      },
+    });
+  }
 }

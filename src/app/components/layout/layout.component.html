@@ -1,6 +1,6 @@
 <div class="d-flex">
     <!-- Sidebar -->
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px; height: 100vh;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark custom-sidebar" style="width: 280px; height: 100vh;">
         <a routerLink="/layout"
             class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <i class="bi-check-circle me-2" style="font-size: 1.5rem;"></i>
@@ -81,7 +81,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-grow-1 p-4">
+    <div class="flex-grow-1 p-4 custom-main-content">
         <!-- Welcome message displayed if no content is loaded yet -->
         <div *ngIf="router.url === '/layout'" class="text-center p-5">
             <div class="alert alert-info" role="alert">
@@ -89,7 +89,45 @@
                 <p>Get started by creating your first election. Click on the "Create Election" button from the sidebar
                     to begin.</p>
                 <hr>
-                <p class="mb-0">You can always manage and view elections here.</p>
+                <p class="mb-0">Or select an election to show results below.</p>
+                <form [formGroup]="electionForm">
+                    <div class="row mb-3">
+                        <!-- Election Select -->
+                        <div class="col-md-6">
+                            <label for="election" class="form-label fs-6">Select Election</label>
+                            <select id="election" formControlName="election"
+                                class="form-select form-select-sm border-0 shadow-sm"
+                                (change)="onElectionChange($event)">
+                                <option value="" disabled>Select Election</option>
+                                <option *ngFor="let election of elections" [value]="election.id">
+                                    {{ election.title }}
+                                </option>
+                            </select>
+                            <div *ngIf="electionForm.get('election')?.invalid && electionForm.get('election')?.touched"
+                                class="text-danger">
+                                Election is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Show Results Button -->
+                    <div class="row mb-3">
+                        <div class="col-md-12 d-flex justify-content-end">
+                            <button type="button" class="btn btn-primary shadow-sm" (click)="showResults()"
+                                [disabled]="electionForm.invalid">
+                                Show Results
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="chart-container">
+                    <div *ngIf="chartLabels.length > 0">
+                        <canvas baseChart [datasets]="[{ data: chartData, label: 'Votes' }]" [labels]="chartLabels"
+                            [options]="chartOptions" chartType="chartType">
+                        </canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
