@@ -163,7 +163,7 @@ export class VoteComponent implements OnInit {
     }
   }
 
-  castVote(candidateId: string): void {
+  castVote(candidateId: string, candidateFullName: string): void {
     console.log(candidateId);
 
     Swal.fire({
@@ -179,6 +179,7 @@ export class VoteComponent implements OnInit {
         const requestBody = {
           userNic: this.currentUserNic,
           candidateId,
+          candidateFullName,
           election: {
             id: this.selectedElectionId,
           },

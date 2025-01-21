@@ -10,6 +10,7 @@ import { ManageCandidatesComponent } from './components/manage-candidates/manage
 import { CreatePartyComponent } from './components/create-party/create-party.component';
 import { ManagePartiesComponent } from './components/manage-parties/manage-parties.component';
 import { VoteComponent } from './components/vote/vote.component';
+import { ManageElectionAdminsComponent } from './components/manage-election-admins/manage-election-admins.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
       { path: 'create-party', component: CreatePartyComponent },
       { path: 'manage-parties', component: ManagePartiesComponent },
       { path: 'vote', component: VoteComponent },
+      { path: 'election-admins', component: ManageElectionAdminsComponent },
     ],
   },
 ];

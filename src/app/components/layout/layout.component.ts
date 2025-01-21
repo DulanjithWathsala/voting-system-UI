@@ -16,6 +16,8 @@ import {
 import { ElectionService } from '../../services/election.service';
 import { VoteService } from '../../services/vote.service';
 import { NgChartsModule } from 'ng2-charts';
+import { CandidateService } from '../../services/candidate.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -33,7 +35,11 @@ import { NgChartsModule } from 'ng2-charts';
 })
 export class LayoutComponent implements OnInit {
   elections: any[] = [];
+  candidates: any[] = [];
   selectedElectionId: any;
+  candidateIds: number[] = [];
+  currentUserEmail: any;
+  currentUserRole: any;
 
   electionForm = new FormGroup({
     election: new FormControl('', Validators.required),
@@ -49,18 +55,27 @@ export class LayoutComponent implements OnInit {
     },
   };
 
-  public chartLabels: string[] = [];
+  public chartLabels: any[] = [];
   public chartData: number[] = [];
   public chartType: string = 'bar';
 
   constructor(
     public router: Router,
     private electionService: ElectionService,
-    private voteService: VoteService
+    private voteService: VoteService,
+    private candidateService: CandidateService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.fetchElections();
+
+    this.currentUserEmail = localStorage.getItem('currentEmail');
+
+    this.authService.getUserByEmail(this.currentUserEmail).subscribe((data) => {
+      this.currentUserRole = data.userType;
+      console.log(this.currentUserRole);
+    });
   }
 
   onElectionChange(event: Event): void {
@@ -81,16 +96,26 @@ export class LayoutComponent implements OnInit {
         .getResultsByElectionId(this.selectedElectionId)
         .subscribe({
           next: (data) => {
-            const labels = data.map(
-              (result: any) => `Candidate ${result.candidateId}`
-            );
+            console.log(data);
+
+            const ids = data.map((result: any) => result.candidateId);
             const values = data.map((result: any) => result.voteCount);
 
-            this.chartLabels = labels;
-            this.chartData = values;
+            const requestBody = {
+              ids: ids,
+            };
 
-            // Trigger chart update
-            console.log(this.chartLabels, this.chartData);
+            this.candidateService
+              .retrieveCandidateNamesByIds(requestBody)
+              .subscribe({
+                next: (data) => {
+                  this.chartLabels = data.names;
+                  this.chartData = values;
+                },
+                error: (error) => {
+                  console.log(error);
+                },
+              });
           },
           error: (error) => {
             console.log(error);

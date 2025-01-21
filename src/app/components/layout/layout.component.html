@@ -8,51 +8,53 @@
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a routerLink="/layout/create-election" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/create-election'">
-                    <i class="bi-house me-2"></i>
-                    Create Election
-                </a>
-            </li>
-            <li>
-                <a routerLink="/layout/view-elections" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/view-elections'">
-                    <i class="bi-table me-2"></i>
-                    Manage Elections
-                </a>
-            </li>
-            <hr>
-            <li>
-                <a routerLink="/layout/create-candidate" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/create-candidate'">
-                    <i class="bi-person-plus me-2"></i>
-                    Create Candidate
-                </a>
-            </li>
-            <li>
-                <a routerLink="/layout/manage-candidates" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/manage-candidates'">
-                    <i class="bi-people me-2"></i>
-                    Manage Candidates
-                </a>
-            </li>
-            <hr>
-            <li>
-                <a routerLink="/layout/create-party" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/create-party'">
-                    <i class="bi-flag me-2"></i>
-                    Create Party
-                </a>
-            </li>
-            <li>
-                <a routerLink="/layout/manage-parties" routerLinkActive="active" class="nav-link text-white"
-                    [class.active]="router.url === '/layout/manage-parties'">
-                    <i class="bi-list-task me-2"></i>
-                    Manage Parties
-                </a>
-            </li>
-            <hr>
+            <div *ngIf="currentUserRole === 'ELECTION_ADMIN'">
+                <li class="nav-item">
+                    <a routerLink="/layout/create-election" routerLinkActive="active" class="nav-link text-white"
+                        [class.active]="router.url === '/layout/create-election'">
+                        <i class="bi-house me-2"></i>
+                        Create Election
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/layout/view-elections" routerLinkActive="active" class="nav-link text-white"
+                        [class.active]="router.url === '/layout/view-elections'">
+                        <i class="bi-table me-2"></i>
+                        Manage Elections
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a routerLink="/layout/create-candidate" routerLinkActive="active" class="nav-link text-white"
+                        [class.active]="router.url === '/layout/create-candidate'">
+                        <i class="bi-person-plus me-2"></i>
+                        Create Candidate
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/layout/manage-candidates" routerLinkActive="active" class="nav-link text-white"
+                        [class.active]="router.url === '/layout/manage-candidates'">
+                        <i class="bi-people me-2"></i>
+                        Manage Candidates
+                    </a>
+                </li>
+                <hr>
+                <li>
+                    <a routerLink="/layout/create-party" routerLinkActive="active" class="nav-link text-white"
+                        [class.active]="router.url === '/layout/create-party'">
+                        <i class="bi-flag me-2"></i>
+                        Create Party
+                    </a>
+                </li>
+                <li>
+                    <a routerLink="/layout/manage-parties" routerLinkActive="active" class="nav-link text-white"
+                        [class.active]="router.url === '/layout/manage-parties'">
+                        <i class="bi-list-task me-2"></i>
+                        Manage Parties
+                    </a>
+                </li>
+                <hr>
+            </div>
             <li>
                 <a routerLink="/layout/vote" routerLinkActive="active" class="nav-link text-white"
                     [class.active]="router.url === '/layout/vote'">
@@ -60,21 +62,23 @@
                     Vote
                 </a>
             </li>
+            <li>
+                <a *ngIf="currentUserRole === 'SYSTEM_ADMIN'" routerLink="/layout/election-admins"
+                    routerLinkActive="active" class="nav-link text-white"
+                    [class.active]="router.url === '/layout/election-admins'">
+                    <i class="bi-people me-2"></i>
+                    Manage Election Admins
+                </a>
+            </li>
         </ul>
         <hr>
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
                 data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong>mdo</strong>
+                <img src="profile pic.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                <strong>{{currentUserEmail}}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a class="dropdown-item" href="#">New project...</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
                 <li><a class="dropdown-item" (click)="onSignOut($event)">Sign out</a></li>
             </ul>
         </div>

@@ -71,7 +71,7 @@
                         <p><strong>Party:</strong> <span class="text-primary"> {{ candidate.party.name }} </span></p>
                         <p><strong>Symbol:</strong> <span class="text-success"> {{ candidate.party.symbol }} </span></p>
                     </div>
-                    <button class="btn btn-success" (click)="castVote(candidate.id)">
+                    <button class="btn btn-success" (click)="castVote(candidate.id, candidate.fullName)">
                         Cast Vote
                     </button>
                 </div>
