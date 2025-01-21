@@ -85,7 +85,7 @@ export class CreateCandidateComponent implements OnInit {
       this.candidateService.create(requestBody).subscribe({
         next: (data) => {
           Swal.fire({
-            title: 'Election created successfully!',
+            title: 'Candidate saved successfully!',
             icon: 'success',
           }).then(() => {
             this.createCandidateForm.reset();

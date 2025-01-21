@@ -41,4 +41,12 @@ export class CandidateService {
       },
     });
   }
+
+  retrieveCandidateNamesByIds(requestBody: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/retrieve/by-ids`, requestBody, {
+      headers: {
+        Authorization: `${localStorage.getItem('authToken')}`,
+      },
+    });
+  }
 }
