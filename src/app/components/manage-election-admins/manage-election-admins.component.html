@@ -1,0 +1,64 @@
+<div class="container-fluid d-flex flex-column justify-content-center mt-3">
+    <div class="row justify-content-center align-items-center flex-grow-1">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-3">
+                <!-- Card Header -->
+                <div class="card-header bg-gradient text-success text-center py-3">
+                    <h3 class="h4">Manage Election Admins</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- NIC Search Section -->
+                    <div class="mb-4">
+                        <label for="search-nic" class="form-label fs-6">Enter a email to create an election
+                            admin</label>
+                        <div class="input-group">
+                            <input #nicInput="ngModel" type="text" id="search-nic" [(ngModel)]="enteredEmail"
+                                class="form-control form-control-sm border-0 shadow-sm" placeholder="Enter Email"
+                                required>
+                            <button class="btn btn-outline-primary" type="button" (click)="searchUser()">
+                                <i class="bi-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Admin Details Card -->
+                    <div class="card shadow-sm mb-4" *ngIf="selectedAdmin">
+                        <div class="card-body">
+                            <p><strong>NIC:</strong> {{selectedAdmin.nic}}</p>
+                            <p><strong>Email:</strong> {{selectedAdmin.email}}</p>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-outline-success btn-sm"
+                                    (click)="makeAdmin(selectedAdmin.nic)">Make Election Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Existing Election Admins Section -->
+    <div class="voting-section p-4 border rounded mt-4">
+        <h4 *ngIf="electionAdmins.length > 0" class="text-center mb-3">Existing Election Admins</h4>
+        <h4 *ngIf="electionAdmins.length === 0" class="text-center mb-3">No Admins yet</h4>
+        <div class="scroll-container">
+            <div class="row">
+                <div *ngFor="let admin of electionAdmins" class="col-md-12 mb-4">
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                            <!-- Admin Details -->
+                            <div>
+                                <p><strong>NIC:</strong> {{ admin.nic }}</p>
+                                <p><strong>Email:</strong> {{ admin.email }}</p>
+                            </div>
+                            <!-- Delete Button -->
+                            <button class="btn btn-outline-danger" (click)="deleteAdmin(admin.nic)">
+                                <i class="bi-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+img.register-logo {
+  max-width: 80px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border: none;
+}
+
+.card-header {
+  background: linear-gradient(90deg, #003973, #00c6ff);
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  padding: 2rem;
+}
+
+.form-control {
+  padding: 0.875rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}

@@ -1,0 +1,176 @@
+<div class="container-fluid d-flex flex-column justify-content-center mt-5">
+    <!-- Back Button -->
+    <div class="position-absolute top-0 start-0 m-5">
+        <button class="btn btn-outline-secondary rounded-circle p-2" (click)="onBack()">
+            <i class="bi bi-arrow-left"></i>
+        </button>
+    </div>
+
+    <div class="row justify-content-center align-items-center flex-grow-1 mt-5">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-3">
+                <div class="card-header bg-gradient text-success text-center py-3">
+                    <h3 class="h4">{{ election.title }}</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Election Details -->
+                    <div class="mb-3">
+                        <p><strong>Description:</strong> {{ election.description }}</p>
+                        <p><strong>Start Date:</strong> {{ election.startDate | date: 'yyyy-MM-dd' }}</p>
+                        <p><strong>End Date:</strong> {{ election.endDate | date: 'yyyy-MM-dd' }}</p>
+                        <p><strong>Status:</strong> {{ election.status }}</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex flex-wrap justify-content-end mt-4 gap-2">
+                        <!-- Create Ballot Button -->
+                        <button class="btn btn-primary text-white rounded-3 px-4 py-2" data-bs-toggle="modal"
+                            data-bs-target="#createBallotModal">
+                            Create Ballot
+                        </button>
+                        <!-- Trigger Button -->
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                            data-bs-target="#ballotModal">
+                            View Ballots
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- View Ballots Modal -->
+<div class="modal fade" id="ballotModal" tabindex="-1" aria-labelledby="ballotModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title text-success" id="ballotModalLabel">Ballot Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <!-- Modal Body (Scrollable Content) -->
+            <div class="modal-body">
+                <div class="container-fluid d-flex justify-content-center">
+                    <div class="col-md-8">
+                        <div class="row container-fluid">
+                            <!-- Loop through the ballots list -->
+                            <div *ngFor="let ballot of ballots" class="col-md-12 mb-4">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-body d-flex">
+                                        <!-- Ballot Title and Description -->
+                                        <div class="flex-grow-1">
+                                            <h5 class="card-title">{{ ballot.title }}</h5>
+                                            <p class="card-text">{{ ballot.description }}</p>
+
+                                            <!-- Created Date -->
+                                            <p class="mb-2"><strong>Created At:</strong> {{ ballot.createdAt | date:
+                                                'yyyy-MM-dd' }}</p>
+
+                                            <!-- Ballot Active Status -->
+                                            <p class="mb-2">
+                                                <strong>Status:</strong>
+                                                <span [ngClass]="{
+                                                    'text-success': ballot.isActive,
+                                                    'text-danger': !ballot.isActive
+                                                }">
+                                                    {{ ballot.isActive ? 'Active' : 'Inactive' }}
+                                                </span>
+                                            </p>
+                                        </div>
+
+                                        <!-- Actions (View Results, Change State, Delete with Bootstrap Icons) -->
+                                        <div class="ms-3 d-flex flex-column justify-content-between">
+                                            <!-- View Results Button -->
+                                            <button class="btn btn-info mb-2" (click)="viewResults(ballot)">
+                                                <i class="bi bi-bar-chart-line"></i> <!-- View Results Icon -->
+                                            </button>
+
+                                            <!-- Change State Button -->
+                                            <button class="btn" [ngClass]="{
+                                                'btn-success': ballot.isActive,
+                                                'btn-danger': !ballot.isActive
+                                            }" (click)="toggleBallotStatus(ballot)">
+                                                <i class="bi" [ngClass]="{
+                                                    'bi-toggle-off': ballot.isActive,
+                                                    'bi-toggle-on': !ballot.isActive
+                                                }"></i> <!-- Toggle Active State Icon -->
+                                            </button>
+
+                                            <!-- Delete Button -->
+                                            <button class="btn btn-outline-danger" (click)="deleteBallot(ballot.id)">
+                                                <i class="bi bi-trash"></i> <!-- Delete Icon -->
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create Ballot Modal -->
+<div class="modal fade" id="createBallotModal" tabindex="-1" aria-labelledby="createBallotModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-success" id="createBallotModalLabel">Create Ballot</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body p-4">
+                    <form [formGroup]="createBallotForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <!-- First Column -->
+                            <div class="col-md-6">
+                                <!-- Title Field -->
+                                <div class="mb-3">
+                                    <label for="title" class="form-label fs-6">Ballot Title</label>
+                                    <input type="text" formControlName="title"
+                                        class="form-control form-control-lg border-0 shadow-sm" id="title"
+                                        placeholder="Enter ballot title" required>
+                                    <div *ngIf="createBallotForm.controls.title?.touched && createBallotForm.controls.title?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createBallotForm.controls.title?.errors?.['required']">
+                                            Ballot title is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Second Column -->
+                            <div class="col-md-6">
+                                <!-- Description Field -->
+                                <div class="mb-3">
+                                    <label for="description" class="form-label fs-6">Ballot Description</label>
+                                    <textarea class="form-control form-control-lg border-0 shadow-sm"
+                                        formControlName="description" id="description" rows="4"
+                                        placeholder="Enter ballot description" required></textarea>
+                                    <div *ngIf="createBallotForm.controls.description?.touched && createBallotForm.controls.description?.invalid"
+                                        class="text-danger">
+                                        <small *ngIf="createBallotForm.controls.description?.errors?.['required']">
+                                            Ballot description is required.
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
+                            <button type="submit" class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Create
+                                Ballot</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

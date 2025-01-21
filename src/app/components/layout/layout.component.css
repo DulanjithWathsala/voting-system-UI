@@ -1,0 +1,67 @@
+.nav-link {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.nav-link.active:hover {
+  background-color: #0056b3;
+}
+
+/* Custom scrollbars for the sidebar */
+.custom-sidebar {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Optional: For smooth custom scroll bar */
+.custom-sidebar::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.custom-sidebar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Darker thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.custom-sidebar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly darker on hover */
+}
+
+.custom-sidebar::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1); /* Light background for the track */
+  border-radius: 10px;
+}
+
+/* Custom scrollbar for the main content */
+.custom-main-content {
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* Optional: For smooth custom scroll bar */
+.custom-main-content::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.custom-main-content::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5); /* Darker thumb */
+  border-radius: 10px; /* Rounded corners */
+}
+
+.custom-main-content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.7); /* Slightly darker on hover */
+}
+
+.custom-main-content::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.1); /* Light background for the track */
+  border-radius: 10px;
+}
