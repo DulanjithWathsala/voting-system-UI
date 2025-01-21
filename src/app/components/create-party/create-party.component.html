@@ -1,0 +1,67 @@
+<div class="container-fluid d-flex flex-column justify-content-center mt-5">
+    <div class="row justify-content-center align-items-center flex-grow-1 mt-5">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-3">
+                <!-- Card Header -->
+                <div class="card-header bg-gradient text-success text-center py-3">
+                    <h3 class="h4">Create Party</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- Create Party Form -->
+                    <form [formGroup]="createPartyForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <!-- Party Name Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="party-name" class="form-label fs-6">Party Name</label>
+                                <input type="text" id="party-name" formControlName="name"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter party name">
+                                <div *ngIf="createPartyForm.controls.name?.touched && createPartyForm.controls.name?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createPartyForm.controls.name?.errors?.['required']">
+                                        Party name is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Party Symbol Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="party-symbol" class="form-label fs-6">Party Symbol</label>
+                                <input type="text" id="party-symbol" formControlName="symbol"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter party symbol">
+                                <div *ngIf="createPartyForm.controls.symbol?.touched && createPartyForm.controls.symbol?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createPartyForm.controls.symbol?.errors?.['required']">
+                                        Party symbol is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Registration Number Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="registration-number" class="form-label fs-6">Registration Number</label>
+                                <input type="text" id="registration-number" formControlName="registrationNumber"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter registration number">
+                                <div *ngIf="createPartyForm.controls.registrationNumber?.touched && createPartyForm.controls.registrationNumber?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createPartyForm.controls.registrationNumber?.errors?.['required']">
+                                        Registration number is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
+                            <button type="submit" [disabled]="createPartyForm.invalid"
+                                class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

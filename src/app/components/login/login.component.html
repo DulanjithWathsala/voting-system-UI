@@ -1,0 +1,57 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="row justify-content-center w-50">
+        <div class="col-lg-8 col-md-10">
+            <div class="card shadow-lg border-0 rounded">
+                <!-- Header -->
+                <div class="card-header text-white text-center py-4">
+                    <h4 class="fw-bold mb-0">Welcome Back</h4>
+                    <p class="small mb-0">Login to continue</p>
+                </div>
+                <!-- Body -->
+                <div class="card-body p-4">
+                    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+                        <!-- Email -->
+                        <div class="form-group mb-4">
+                            <label for="email" class="form-label fw-semibold">Email Address</label>
+                            <input type="email" id="email" formControlName="username" name="email"
+                                class="form-control border-0 shadow-sm" placeholder="Enter your email" />
+                            <div *ngIf="loginForm.controls.username?.touched && loginForm.controls.username?.invalid"
+                                class="text-danger mt-1">
+                                <small *ngIf="loginForm.controls.username?.errors?.['required']">
+                                    Email is required.
+                                </small>
+                                <small *ngIf="loginForm.controls.username?.errors?.['email']">
+                                    Please enter a valid email address.
+                                </small>
+                            </div>
+                        </div>
+                        <!-- Password -->
+                        <div class="form-group mb-4">
+                            <label for="password" class="form-label fw-semibold">Password</label>
+                            <input type="password" id="password" formControlName="password" name="password"
+                                class="form-control border-0 shadow-sm" placeholder="Enter your password" />
+                            <div *ngIf="loginForm.controls.password?.touched && loginForm.controls.password?.invalid"
+                                class="text-danger mt-1">
+                                <small *ngIf="loginForm.controls.password?.errors?.['required']">
+                                    Password is required.
+                                </small>
+                            </div>
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary text-white rounded shadow-sm py-2"
+                                [disabled]="loginForm.invalid">
+                                Login
+                            </button>
+                        </div>
+                        <!-- Register Redirect -->
+                        <div class="text-center mt-4">
+                            <p class="mb-2">Don't have an account?</p>
+                            <a routerLink="/register" class="btn btn-link text-primary">Create an Account</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+<div class="container-fluid d-flex flex-column justify-content-center mt-3">
+    <div class="row justify-content-center align-items-center flex-grow-1">
+        <div class="col-md-8">
+            <div class="card shadow-lg rounded-3">
+                <!-- Card Header -->
+                <div class="card-header bg-gradient text-success text-center py-3">
+                    <h3 class="h4">Create Candidate</h3>
+                </div>
+                <div class="card-body p-4">
+                    <!-- NIC Search Section -->
+                    <div class="mb-4">
+                        <label for="nic" class="form-label fs-6">Search Candidate by NIC</label>
+                        <div class="input-group">
+                            <input #nicInput="ngModel" type="text" id="nic" [(ngModel)]="currentNic"
+                                class="form-control form-control-sm border-0 shadow-sm" placeholder="Enter NIC"
+                                required>
+                            <button class="btn btn-outline-primary" type="button"
+                                [disabled]="nicInput.control.value === ''" (click)="searchOnClick()">
+                                <i class="bi-search"></i> Search
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Candidate Details Card -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-body">
+                            <p><strong>NIC:</strong> {{currentUser ? currentUser.nic : ''}}</p>
+                            <p><strong>Email:</strong> {{currentUser ? currentUser.email : ''}}</p>
+                        </div>
+                    </div>
+
+                    <!-- Create Candidate Form -->
+                    <form [formGroup]="createCandidateForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <!-- Full Name Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="full-name" class="form-label fs-6">Full Name</label>
+                                <input type="text" id="full-name" formControlName="fullName"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter full name">
+                                <div *ngIf="createCandidateForm.controls.fullName?.touched && createCandidateForm.controls.fullName?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.fullName?.errors?.['required']">
+                                        Full name is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Candidate Position Field -->
+                            <div class="col-md-6 mb-3">
+                                <label for="position" class="form-label fs-6">Candidate Position</label>
+                                <input type="text" id="position" formControlName="position"
+                                    class="form-control form-control-sm border-0 shadow-sm"
+                                    placeholder="Enter current position or highest education">
+                                <div *ngIf="createCandidateForm.controls.position?.touched && createCandidateForm.controls.position?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.position?.errors?.['required']">
+                                        Position is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Party Selection -->
+                            <div class="col-md-6 mb-3">
+                                <label for="party" class="form-label fs-6">Select Party</label>
+                                <select id="party" formControlName="party"
+                                    class="form-select form-select-sm border-0 shadow-sm">
+                                    <option value="" disabled selected>Select Party</option>
+                                    @for (party of parties; track party.id) {
+                                    <option [value]="party.id">{{party.name}}</option>
+                                    }
+                                </select>
+                                <div *ngIf="createCandidateForm.controls.party?.touched && createCandidateForm.controls.party?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.party?.errors?.['required']">
+                                        Selecting a party is required.
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Election Selection -->
+                            <div class="col-md-6 mb-3">
+                                <label for="election" class="form-label fs-6">Select Election</label>
+                                <select id="election" formControlName="election"
+                                    class="form-select form-select-sm border-0 shadow-sm">
+                                    <option value="" disabled selected>Select Election</option>
+                                    @for (item of elections; track item.id) {
+                                    <option [value]="item.id">{{item.title}}</option>
+                                    }
+
+                                </select>
+                                <div *ngIf="createCandidateForm.controls.election?.touched && createCandidateForm.controls.election?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="createCandidateForm.controls.election?.errors?.['required']">
+                                        Selecting an election is required.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="d-flex justify-content-end gap-3">
+                            <button type="reset" class="btn btn-outline-danger btn rounded-3 px-4 py-2">Clear</button>
+                            <button type="submit" [disabled]="createCandidateForm.invalid"
+                                class="btn btn-gradient btn text-white rounded-3 px-4 py-2">Submit</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

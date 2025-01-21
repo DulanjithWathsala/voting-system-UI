@@ -1,0 +1,25 @@
+.container-fluid {
+  padding-top: 0;
+  overflow: hidden;
+}
+
+.btn-gradient {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+}
+
+.form-label {
+  font-size: 0.9rem;
+}
+
+.form-control-lg,
+.form-select-lg {
+  font-size: 0.9rem;
+}
+
+.card-header {
+  padding: 1rem;
+}
+
+.card-body {
+  padding: 1.5rem;
+}

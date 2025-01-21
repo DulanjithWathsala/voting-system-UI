@@ -1,0 +1,17 @@
+.btn-gradient {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+}
+
+.container-fluid {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.container-fluid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container-fluid::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
