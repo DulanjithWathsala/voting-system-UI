@@ -28,13 +28,10 @@ export class ManageElectionAdminsComponent implements OnInit {
   fetchElectionAdmins(): void {
     this.superAdminService.getAllElectionAdmins().subscribe((data: any[]) => {
       this.electionAdmins = data;
-      console.log(this.electionAdmins);
     });
   }
 
   searchUser(): void {
-    console.log(this.enteredEmail);
-
     this.authService.getUserByEmail(this.enteredEmail).subscribe({
       next: (data) => {
         console.log(data);
@@ -60,7 +57,6 @@ export class ManageElectionAdminsComponent implements OnInit {
   makeAdmin(nic: any): void {
     this.superAdminService.createElectionAdmin(nic).subscribe({
       next: (data) => {
-        console.log(data);
         this.selectedAdmin = null;
         this.fetchElectionAdmins();
         Swal.fire({
@@ -79,5 +75,38 @@ export class ManageElectionAdminsComponent implements OnInit {
     });
   }
 
-  deleteAdmin(nic: any): void {}
+  deleteAdmin(nic: any): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.superAdminService.deleteElectionAdmin(nic).subscribe({
+          next: (data) => {
+            this.fetchElectionAdmins();
+            console.log(data);
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Election admin has been removed.',
+              icon: 'success',
+            });
+          },
+          error: (error) => {
+            console.log(error);
+
+            Swal.fire({
+              title: 'Failed!',
+              text: 'Delete failed. Try again!',
+              icon: 'error',
+            });
+          },
+        });
+      }
+    });
+  }
 }

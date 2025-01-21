@@ -29,4 +29,12 @@ export class SuperAdminService {
       }),
     });
   }
+
+  deleteElectionAdmin(nic: any): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete-election-admin/${nic}`, {
+      headers: new HttpHeaders({
+        Authorization: `${localStorage.getItem('authToken')}`,
+      }),
+    });
+  }
 }
