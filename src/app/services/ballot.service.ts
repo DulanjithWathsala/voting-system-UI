@@ -11,26 +11,14 @@ export class BallotService {
   constructor(private http: HttpClient) {}
 
   create(requestBody: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/create-ballot`, requestBody, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.post<any>(`${this.baseUrl}/create-ballot`, requestBody);
   }
 
   retrieveBallotByElectionId(electionId: any): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/retrieve-ballot/${electionId}`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.get<any>(`${this.baseUrl}/retrieve-ballot/${electionId}`);
   }
 
   deleteBallot(id: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/delete-ballot/${id}`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.delete<any>(`${this.baseUrl}/delete-ballot/${id}`);
   }
 }

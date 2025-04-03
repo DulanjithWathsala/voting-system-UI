@@ -11,62 +11,29 @@ export class ElectionService {
   constructor(private http: HttpClient) {}
 
   create(requestBody: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/create`, requestBody, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.post<any>(`${this.baseUrl}/create`, requestBody);
   }
 
   getAllElections(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/retrieve`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.get(`${this.baseUrl}/retrieve`);
   }
 
   updateElectionDetails(electionId: any, requestBody: any): Observable<any> {
     return this.http.put<any>(
       `${this.baseUrl}/update/${electionId}`,
-      requestBody,
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
+      requestBody
     );
   }
 
   deleteElection(electionId: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/delete/${electionId}`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.delete<any>(`${this.baseUrl}/delete/${electionId}`);
   }
 
   startElection(electionId: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/start/${electionId}`,
-      {},
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
-    );
+    return this.http.post<any>(`${this.baseUrl}/start/${electionId}`, {});
   }
 
   endElection(electionId: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.baseUrl}/end/${electionId}`,
-      {},
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
-    );
+    return this.http.post<any>(`${this.baseUrl}/end/${electionId}`, {});
   }
 }

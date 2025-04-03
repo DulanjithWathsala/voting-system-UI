@@ -11,38 +11,18 @@ export class PartyService {
   constructor(private http: HttpClient) {}
 
   create(requestBody: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/create`, requestBody, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.post<any>(`${this.baseUrl}/create`, requestBody);
   }
 
   getAllParties(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/retrieve`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.get(`${this.baseUrl}/retrieve`);
   }
 
   updatePartyDetails(partyId: any, requestBody: any): Observable<any> {
-    return this.http.put<any>(
-      `${this.baseUrl}/update/${partyId}`,
-      requestBody,
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
-    );
+    return this.http.put<any>(`${this.baseUrl}/update/${partyId}`, requestBody);
   }
 
   deleteParty(partyId: any): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/delete/${partyId}`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.delete<any>(`${this.baseUrl}/delete/${partyId}`);
   }
 }

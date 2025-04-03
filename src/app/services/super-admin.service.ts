@@ -13,28 +13,15 @@ export class SuperAdminService {
   createElectionAdmin(nic: any): Observable<any> {
     return this.http.post<any>(
       `${this.baseUrl}/create-election-admin/${nic}`,
-      null,
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
+      null
     );
   }
 
   getAllElectionAdmins(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/retrieve-all`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.get<any>(`${this.baseUrl}/retrieve-all`);
   }
 
   deleteElectionAdmin(nic: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/delete-election-admin/${nic}`, {
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
-    });
+    return this.http.delete(`${this.baseUrl}/delete-election-admin/${nic}`);
   }
 }

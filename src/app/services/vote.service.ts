@@ -13,51 +13,27 @@ export class VoteService {
   checkUserIsVerified(email: string): Observable<any> {
     return this.http.post<any>(
       `http://localhost:8080/api/user/check-verification`,
-      null,
-      {
-        params: new HttpParams().set('email', email),
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
+      null
     );
   }
 
   checkUserIsCasted(email: string): Observable<boolean> {
     return this.http.get<boolean>(
-      `http://localhost:8080/api/user/${email}/hasVoted`,
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
+      `http://localhost:8080/api/user/${email}/hasVoted`
     );
   }
 
   getUserDetailsByEmail(email: string): Observable<any> {
     return this.http.get<any>(
-      `http://localhost:8080/api/user/by-email/${email}`,
-      {
-        headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('authToken')}`,
-        }),
-      }
+      `http://localhost:8080/api/user/by-email/${email}`
     );
   }
 
   castVote(requestBody: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/cast`, requestBody, {
-      headers: {
-        Authorization: `${localStorage.getItem('authToken')}`,
-      },
-    });
+    return this.http.post<any>(`${this.baseUrl}/cast`, requestBody);
   }
 
   getResultsByElectionId(electionId: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/results/${electionId}`, {
-      headers: {
-        Authorization: `${localStorage.getItem('authToken')}`,
-      },
-    });
+    return this.http.get(`${this.baseUrl}/results/${electionId}`);
   }
 }

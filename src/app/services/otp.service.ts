@@ -13,18 +13,12 @@ export class OtpService {
   generateOtp(email: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/generate`, null, {
       params: new HttpParams().set('email', email),
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
     });
   }
 
   verifyOtp(email: string, otp: string): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/verify`, null, {
       params: new HttpParams().set('email', email).set('otp', otp),
-      headers: new HttpHeaders({
-        Authorization: `${localStorage.getItem('authToken')}`,
-      }),
     });
   }
 }

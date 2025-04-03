@@ -19,10 +19,6 @@ export class AuthService {
   }
 
   getUserByEmail(email: any): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/by-email/${email}`, {
-      headers: {
-        Authorization: `${localStorage.getItem('authToken')}`,
-      },
-    });
+    return this.http.get<any>(`${this.baseUrl}/by-email/${email}`);
   }
 }
